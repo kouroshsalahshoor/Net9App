@@ -1,4 +1,5 @@
-﻿window.showToastr = function (type, message) {
+﻿//https://codeseven.github.io/toastr/
+window.showToastr = function (type, message) {
     if (type == "success") {
         toastr.success(message);
     }

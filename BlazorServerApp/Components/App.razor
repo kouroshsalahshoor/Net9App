@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
+
+    <link rel="stylesheet" href="@Assets["lib/toastr.js/toastr.min.css"]" />
+    <link rel="stylesheet" href="@Assets["lib/sweetalert2/sweetalert2.min.css"]" />
+    
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["BlazorServerApp.styles.css"]" />
     <ImportMap />
     <link rel="icon" type="image/png" href="favicon.png" />
-
-    <link rel="stylesheet" href="@Assets["lib/toastr.js/toastr.min.css"]" />
     <HeadOutlet @rendermode="PageRenderMode" />
 </head>
 
@@ -22,6 +24,9 @@
     <script src="lib/toastr.js/toastr.min.js"></script>
     <script src="js/toastr.js"></script>
 
+    <script src="lib/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="js/sweetalert.js"></script>
+    
     <script src="_framework/blazor.web.js"></script>
 </body>
 
