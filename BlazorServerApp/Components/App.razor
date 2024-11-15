@@ -10,11 +10,18 @@
     <link rel="stylesheet" href="@Assets["BlazorServerApp.styles.css"]" />
     <ImportMap />
     <link rel="icon" type="image/png" href="favicon.png" />
+
+    <link rel="stylesheet" href="@Assets["lib/toastr.js/toastr.min.css"]" />
     <HeadOutlet @rendermode="PageRenderMode" />
 </head>
 
 <body>
     <Routes @rendermode="PageRenderMode" />
+
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/toastr.js/toastr.min.js"></script>
+    <script src="js/toastr.js"></script>
+
     <script src="_framework/blazor.web.js"></script>
 </body>
 

@@ -1,0 +1,34 @@
+﻿@page "/toastr"
+@inject IJSRuntime _js
+
+<PageTitle>@_title</PageTitle>
+
+<h1>@_title</h1>
+
+<div class="row">
+    <button class="btn btn-success m-1" @onclick="@(async () => await x("success", "Success"))">Success</button>
+    <button class="btn btn-warning m-1" @onclick="@(async () => await x("warning", "warning"))">warning</button>
+    <button class="btn btn-danger m-1" @onclick="@(async () => await x("error", "error"))">error</button>
+</div>
+
+@code {
+    private string _title = "Toastr";
+
+    private async Task x(string type, string message)
+    {
+        if (type == "success")
+        {
+            await _js.ToastrSuccess(message);
+        }
+        else if (type == "warning")
+        {
+            await _js.ToastrWarning(message);
+        }
+        else if (type == "error")
+        {
+            await _js.ToastrError(message);
+        }
+
+        // await _js.InvokeVoidAsync("showToastr", type, message);
+    }
+}
