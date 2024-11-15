@@ -1,0 +1,26 @@
+﻿@page "/ConfirmBox"
+@inject IJSRuntime _js
+
+<PageTitle>@_title</PageTitle>
+
+<h1>@_title</h1>
+
+<div class="row">
+    <button class="btn btn-primary" @onclick="confirm">Confirm</button>
+</div>
+
+@code {
+    private string _title = "Confirm Box";
+    private string _message = "Are you sure you want to xxx?";
+
+    private async Task confirm(){
+        if (await _js.InvokeAsync<bool>("confirm", _message))
+        {
+            await _js.InvokeVoidAsync("alert", "Confirmed");
+        }
+        else
+        {
+            await _js.InvokeVoidAsync("alert", "Rejected");
+        }
+    }
+}
