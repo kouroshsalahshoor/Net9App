@@ -2,7 +2,7 @@
 
 namespace Application.Repository;
 
-public interface ICatalogRepository
+public interface ICategoryRepository
 {
     Task<CategoryDto> Create(CategoryDto dto);
     Task<CategoryDto> Update(CategoryDto dto);
