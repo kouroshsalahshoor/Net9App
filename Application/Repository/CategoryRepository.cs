@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Dtos;
 using Domain;
 using Domain.Dtos;
 using Infrastructure.Data;
