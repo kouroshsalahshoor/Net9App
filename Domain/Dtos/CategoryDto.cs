@@ -1,4 +1,4 @@
-﻿namespace Shared.Dtos;
+﻿namespace Domain.Dtos;
 
 public class CategoryDto
 {

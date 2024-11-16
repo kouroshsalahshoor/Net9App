@@ -1,0 +1,50 @@
+﻿@page "/categories"
+@attribute [StreamRendering]
+
+<PageTitle>@_title</PageTitle>
+
+<h1>@_title</h1>
+
+@if (_items == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-hover table-sm table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>
+                    <a class="btn btn-primary" href="categories/create">Create New</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in _items)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private string _title = "Categories";
+
+    private IEnumerable<CategoryDto>? _items;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // await Task.Delay(3000);
+        _items = await _categoryRepository.Get();
+    }
+}
