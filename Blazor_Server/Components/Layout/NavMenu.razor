@@ -19,38 +19,86 @@
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Categories">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Categories
+            <NavLink class="nav-link" @onclick="()=>expandSubNavPages = !expandSubNavPages">
+                @if (expandSubNavPages)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1" />
+                    </svg>
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
+                    </svg>
+                }
+                Pages
             </NavLink>
         </div>
+        @if (expandSubNavPages)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="Categories">
+                    <i class="bi-circle-fill px-3"></i>
+                    Categories
+                </NavLink>
+            </div>
+        }
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="swal">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Sweet Alert
+            <NavLink class="nav-link" @onclick="()=>expandSubNavDemos = !expandSubNavDemos">
+                @if (expandSubNavDemos)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1" />
+                    </svg>
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
+                    </svg>
+                }
+                Demos
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="toastr">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Toastr
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="confirmbox">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Confirm Box
-            </NavLink>
-        </div>
+        @if (expandSubNavDemos)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="swal">
+                    <i class="bi-circle-fill px-3"></i>
+                    Sweet Alert
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="toastr">
+                    <i class="bi-circle-fill px-3"></i>
+                    Toastr
+                </NavLink>
+            </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="confirmbox">
+                    <i class="bi-circle-fill px-3"></i>
+                    Confirm Box
+                </NavLink>
+            </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="counter">
+                    <i class="bi-circle-fill px-3"></i>
+                    @* <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> *@
+                    Counter
+                </NavLink>
+            </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="weather">
+                    <i class="bi-list-nested px-3"></i>
+                    @* <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> *@
+                    Weather
+                </NavLink>
+            </div>
+        }
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="auth">
@@ -93,6 +141,9 @@
 
 @code {
     private string? currentUrl;
+
+    private bool expandSubNavPages;
+    private bool expandSubNavDemos;
 
     protected override void OnInitialized()
     {
