@@ -6,7 +6,7 @@ using Shared.Dtos;
 
 namespace Application.Repository;
 
-public class CategoryRepository : ICatalogRepository
+public class CategoryRepository : ICategoryRepository
 {
     private readonly ApplicationDbContext _db;
     private readonly IMapper _mapper;
