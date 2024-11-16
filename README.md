@@ -13,7 +13,7 @@
 * Business (Services - Use Cases) => Application
 * DataAccess => Infrastructure
 * UI => Presentation
-* Common => Shared?
+* Common (Dtos) => Shared
 
 ![Architecture](/images/clean_architecture.png)
 
