@@ -1,4 +1,5 @@
-﻿using Shared.Dtos;
+﻿
+using Common.Dtos;
 
 namespace Application.Repository;
 

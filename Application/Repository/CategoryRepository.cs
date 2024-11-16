@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using Common.Dtos;
 using Domain;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Shared.Dtos;
 
 namespace Application.Repository;
 
