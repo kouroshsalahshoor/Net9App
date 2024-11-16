@@ -1,6 +1,7 @@
 using Blazor_Server.Components;
 using Blazor_Server.Components.Account;
-using Blazor_Server.Data;
+using Domain;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
