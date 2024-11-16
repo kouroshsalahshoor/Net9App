@@ -1,4 +1,4 @@
-﻿@page "/categories/create"
+﻿@page "/xcategories/create"
 @using Microsoft.EntityFrameworkCore
 @using Domain
 @inject IDbContextFactory<Infrastructure.Data.ApplicationDbContext> DbFactory
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a href="/categories">Back to List</a>
+    <a href="/xcategories">Back to List</a>
 </div>
 
 @code {
@@ -44,6 +44,6 @@
         using var context = DbFactory.CreateDbContext();
         context.Categories.Add(Category);
         await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/categories");
+        NavigationManager.NavigateTo("/xcategories");
     }
 }

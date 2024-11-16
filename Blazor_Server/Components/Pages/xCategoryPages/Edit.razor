@@ -1,4 +1,4 @@
-﻿@page "/categories/edit"
+﻿@page "/xcategories/edit"
 @using Microsoft.EntityFrameworkCore
 @using Domain
 @inject IDbContextFactory<Infrastructure.Data.ApplicationDbContext> DbFactory
@@ -39,7 +39,7 @@ else
 }
 
 <div>
-    <a href="/categories">Back to List</a>
+    <a href="/xcategories">Back to List</a>
 </div>
 
 @code {
@@ -83,7 +83,7 @@ else
             }
         }
 
-        NavigationManager.NavigateTo("/categories");
+        NavigationManager.NavigateTo("/xcategories");
     }
 
     private bool CategoryExists(int id)
