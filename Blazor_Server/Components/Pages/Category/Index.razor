@@ -17,7 +17,8 @@ else
                 <th>Id</th>
                 <th>Name</th>
                 <th>
-                    <a class="btn btn-primary" href="category/create">Create</a>
+                    <a class="btn btn-primary px-3" href="category/create">Create</a>
+                    <button class="btn btn-primary px-3" @onclick="async () => await _createUpdateModal.Show(0)">Create Modal</button>
                 </th>
             </tr>
         </thead>
@@ -28,8 +29,9 @@ else
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>
-                        <a class="btn btn-warning" href="category/update/@item.Id">Update</a>
-                        <button class="btn btn-danger" @onclick="async () => await delete(item.Id)">Delete</button>
+                        <a class="btn btn-warning px-3" href="category/update/@item.Id">Update</a>
+                        <button class="btn btn-warning px-3" @onclick="async () => await _createUpdateModal.Show(item.Id)">Update Modal</button>
+                        <button class="btn btn-danger px-3" @onclick="async () => await delete(item.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -37,10 +39,13 @@ else
     </table>
 }
 
+<CreateUpdateModal @ref="_createUpdateModal" OnClose="async () => await modalClosed()" />
 
 @code {
     private string _title = "Categories";
     private bool _loading = true;
+
+    private CreateUpdateModal _createUpdateModal;
 
     private IEnumerable<CategoryDto> _items = new List<CategoryDto>();
 
@@ -60,7 +65,7 @@ else
     private async Task load()
     {
         _loading = true;
-        await Task.Delay(3000);
+        // await Task.Delay(3000);
 
         _items = await _categoryRepository.Get();
 
@@ -75,6 +80,11 @@ else
             await _categoryRepository.Delete(id);
             await _jSRuntime.ToastrSuccess("Deleted");
         }
+        await load();
+    }
+
+    private async Task modalClosed()
+    {
         await load();
     }
 }

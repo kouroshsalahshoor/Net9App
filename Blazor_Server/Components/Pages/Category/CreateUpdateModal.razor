@@ -1,0 +1,111 @@
+﻿@attribute [StreamRendering]
+
+@if (_show)
+{
+    <div class="modal fade show" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
+
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">@_title Category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary class="text-danger" role="alert" />
+
+                                <div class="mb-3">
+                                    <label for="id" class="form-label">Id</label>
+                                    <input id="id" value="@_dto.Id" class="form-control" disabled />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                                    <ValidationMessage For="() => _dto.Name" class="text-danger" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" @onclick="close">Close</button>
+                        <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
+                    </div>
+
+                </EditForm>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string _title = string.Empty;
+    private bool _show = false;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [SupplyParameterFromForm]
+    private CategoryDto _dto { get; set; } = new();
+
+    public async Task Show(int id)
+    {
+        Id = id;
+        _show = true;
+
+        await load();
+
+        StateHasChanged();
+    }
+
+    private async Task load()
+    {
+        if (Id == 0)
+        {
+            _title = "Create";
+        }
+        else
+        {
+            _title = "Update";
+
+            _dto = await _categoryRepository.Get(Id);
+            if (_dto is null)
+            {
+                await _jSRuntime.ToastrError("Item not found!");
+            }
+        }
+    }
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task save()
+    {
+        if (Id == 0)
+        {
+            await _categoryRepository.Create(_dto);
+            await _jSRuntime.ToastrSuccess("Created");
+        }
+        else
+        {
+            await _categoryRepository.Update(_dto);
+            await _jSRuntime.ToastrSuccess("Edited");
+        }
+
+        await close();
+    }
+
+    private async Task close()
+    {
+        _show = false;
+        await OnClose.InvokeAsync();
+    }
+}
