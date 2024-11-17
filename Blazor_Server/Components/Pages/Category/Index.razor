@@ -17,7 +17,7 @@ else
                 <th>Id</th>
                 <th>Name</th>
                 <th>
-                    <a class="btn btn-primary" href="categories/create">Create New</a>
+                    <a class="btn btn-primary" href="category/create">Create</a>
                 </th>
             </tr>
         </thead>
@@ -28,7 +28,8 @@ else
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>
-
+                        <a class="btn btn-warning" href="category/update/@item.Id">Update</a>
+                        <button class="btn btn-danger" @onclick="async () => await delete(item.Id)">Delete</button>
                     </td>
                 </tr>
             }
@@ -44,7 +45,22 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await load();
+    }
+
+    private async Task load()
+    {
         // await Task.Delay(3000);
         _items = await _categoryRepository.Get();
+    }
+
+    private async Task delete(int id)
+    {
+        if (await _jSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this item?"))
+        {
+            await _categoryRepository.Delete(id);
+            await _jSRuntime.ToastrSuccess("Deleted");
+        }
+        await load();
     }
 }

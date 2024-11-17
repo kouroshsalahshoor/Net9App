@@ -1,0 +1,79 @@
+﻿@page "/category/create"
+@page "/category/update/{id:int}"
+
+@attribute [StreamRendering]
+
+<PageTitle>Category @_title</PageTitle>
+
+<h1>Category @_title</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert" />
+
+            <div class="mb-3">
+                <label for="id" class="form-label">Id:</label>
+                <input id="id" value="@_dto.Id" class="form-control" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                <ValidationMessage For="() => _dto.Name" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">@_title</button>
+                <a class="btn btn-light px-3" href="/categories">Back to List</a>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string _title = string.Empty;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private CategoryDto _dto { get; set; } = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id == 0)
+        {
+            _title = "Create";
+        }
+        else
+        {
+            _title = "Update";
+
+            _dto = await _categoryRepository.Get(Id);
+            if (_dto is null)
+            {
+                await _jSRuntime.ToastrError("Item not found!");
+            }
+        }
+    }
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task save()
+    {
+        if (Id == 0)
+        {
+            await _categoryRepository.Create(_dto);
+            await _jSRuntime.ToastrSuccess("Created");
+        }
+        else
+        {
+            await _categoryRepository.Update(_dto);
+            await _jSRuntime.ToastrSuccess("Edited");
+        }
+
+        _navigationManager.NavigateTo("/categories");
+    }
+}
