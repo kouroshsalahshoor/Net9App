@@ -5,9 +5,9 @@
 
 <h1>@_title</h1>
 
-@if (_items == null)
+@if (_loading)
 {
-    <p><em>Loading...</em></p>
+    <_Loading />
 }
 else
 {
@@ -40,18 +40,32 @@ else
 
 @code {
     private string _title = "Categories";
+    private bool _loading = true;
 
-    private IEnumerable<CategoryDto>? _items;
+    private IEnumerable<CategoryDto> _items = new List<CategoryDto>();
 
-    protected override async Task OnInitializedAsync()
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await load();
+    // }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await load();
+        if (firstRender)
+        {
+            await load();
+        }
     }
 
     private async Task load()
     {
-        // await Task.Delay(3000);
+        _loading = true;
+        await Task.Delay(3000);
+
         _items = await _categoryRepository.Get();
+
+        _loading = false;
+        StateHasChanged();
     }
 
     private async Task delete(int id)
