@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">@_title</button>
+                <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
                 <a class="btn btn-light px-3" href="/categories">Back to List</a>
             </div>
         </EditForm>
