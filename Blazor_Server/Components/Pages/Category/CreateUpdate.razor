@@ -15,18 +15,18 @@
             <ValidationSummary class="text-danger" role="alert" />
 
             <div class="mb-3">
-                <label for="id" class="form-label">Id:</label>
+                <label for="id" class="form-label">Id</label>
                 <input id="id" value="@_dto.Id" class="form-control" disabled />
             </div>
 
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
+                <label for="name" class="form-label">Name</label>
                 <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
                 <ValidationMessage For="() => _dto.Name" class="text-danger" />
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">@_title</button>
+                <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
                 <a class="btn btn-light px-3" href="/categories">Back to List</a>
             </div>
         </EditForm>
