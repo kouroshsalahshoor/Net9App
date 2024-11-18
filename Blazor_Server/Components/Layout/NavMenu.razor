@@ -14,7 +14,8 @@
     <nav class="nav flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <i class="bi-house-door-fill px-1"></i>
+                Home
             </NavLink>
         </div>
 
@@ -22,15 +23,11 @@
             <NavLink class="nav-link" @onclick="()=>expandSubNavPages = !expandSubNavPages">
                 @if (expandSubNavPages)
                 {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1" />
-                    </svg>
+                    <i class="bi-dash-square-fill px-1"></i>
                 }
                 else
                 {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
-                    </svg>
+                    <i class="bi-plus-square-fill px-1"></i>
                 }
                 Pages
             </NavLink>
@@ -39,7 +36,7 @@
         {
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="Categories">
-                    <i class="bi-circle-fill px-3"></i>
+                    <i class="bi-list-nested px-3"></i>
                     Categories
                 </NavLink>
             </div>
@@ -49,15 +46,11 @@
             <NavLink class="nav-link" @onclick="()=>expandSubNavDemos = !expandSubNavDemos">
                 @if (expandSubNavDemos)
                 {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1" />
-                    </svg>
+                    <i class="bi-dash-square-fill px-1"></i>
                 }
                 else
                 {
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
-                    </svg>
+                    <i class="bi-plus-square-fill px-1"></i>
                 }
                 Demos
             </NavLink>
@@ -66,27 +59,26 @@
         {
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="swal">
-                    <i class="bi-circle-fill px-3"></i>
+                    <i class="bi-list-nested px-3"></i>
                     Sweet Alert
                 </NavLink>
             </div>
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="toastr">
-                    <i class="bi-circle-fill px-3"></i>
+                    <i class="bi-list-nested px-3"></i>
                     Toastr
                 </NavLink>
             </div>
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="confirmbox">
-                    <i class="bi-circle-fill px-3"></i>
+                    <i class="bi-list-nested px-3"></i>
                     Confirm Box
                 </NavLink>
             </div>
 
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="counter">
-                    <i class="bi-circle-fill px-3"></i>
-                    @* <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> *@
+                    <i class="bi-list-nested px-3"></i>
                     Counter
                 </NavLink>
             </div>
@@ -94,7 +86,6 @@
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="weather">
                     <i class="bi-list-nested px-3"></i>
-                    @* <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> *@
                     Weather
                 </NavLink>
             </div>
@@ -102,7 +93,8 @@
 
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
+                <i class="bi-lock px-1"></i>
+                Auth Required
             </NavLink>
         </div>
 
@@ -110,7 +102,9 @@
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
+                        <i class="bi-person-fill px-1"></i>
+                        @* <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> *@
+                        @context.User.Identity?.Name
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
@@ -118,7 +112,9 @@
                         <AntiforgeryToken />
                         <input type="hidden" name="ReturnUrl" value="@currentUrl" />
                         <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
+                            <i class="bi-arrow-bar-left px-1"></i>
+                            @* <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> *@
+                            Logout
                         </button>
                     </form>
                 </div>
@@ -126,12 +122,14 @@
             <NotAuthorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
+                        <i class="bi-person px-1"></i>
+                        Register
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
+                        <i class="bi-person-badge px-1"></i>
+                        Login
                     </NavLink>
                 </div>
             </NotAuthorized>

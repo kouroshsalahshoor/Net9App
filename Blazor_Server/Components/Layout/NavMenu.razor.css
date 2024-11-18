@@ -123,3 +123,8 @@
         overflow-y: auto;
     }
 }
+
+/*added*/
+i {
+    font-size: 1.25rem
+}
