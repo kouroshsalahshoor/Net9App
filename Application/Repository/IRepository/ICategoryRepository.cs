@@ -1,6 +1,4 @@
-﻿
-
-using Domain.Dtos;
+﻿using Domain.Dtos;
 
 namespace Application.Repository;
 
