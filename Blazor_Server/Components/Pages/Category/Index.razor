@@ -49,11 +49,6 @@ else
 
     private IEnumerable<CategoryDto> _items = new List<CategoryDto>();
 
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     await load();
-    // }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
