@@ -62,6 +62,19 @@ public class CategoryRepository : ICategoryRepository
         return new CategoryDto();
     }
 
+    public async Task<CategoryDto>? GetByName(string name)
+    {
+        if (string.IsNullOrEmpty(name) == false)
+        {
+            var model = await _db.Categories.FirstOrDefaultAsync(x => x.Name == name);
+            if (model is not null)
+            {
+                return _mapper.Map<CategoryDto>(model);
+            }
+        }
+        return null!;
+    }
+
     public async Task<IEnumerable<CategoryDto>> Get()
     {
         return _mapper.Map<IEnumerable<CategoryDto>>(_db.Categories);

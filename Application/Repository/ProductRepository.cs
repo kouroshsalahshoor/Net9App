@@ -41,7 +41,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<ProductDto> Get(int id)
     {
-        var model = await _db.Products.FirstOrDefaultAsync(x => x.Id == id);
+        var model = await _db.Products.Include(x=> x.Category).FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<ProductDto>(model);
@@ -51,7 +51,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<ProductDto>> Get()
     {
-        return _mapper.Map<IEnumerable<ProductDto>>(_db.Products);
+        return _mapper.Map<IEnumerable<ProductDto>>(_db.Products.Include(x => x.Category));
     }
 
     public async Task<ProductDto> Update(ProductDto dto)

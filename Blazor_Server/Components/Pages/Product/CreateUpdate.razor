@@ -1,0 +1,103 @@
+﻿@page "/product/create"
+@page "/product/update/{id:int}"
+
+@attribute [StreamRendering]
+
+<PageTitle>@_title Product</PageTitle>
+
+<h1>@_title Product</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @if (_loading)
+        {
+            <_Loading />
+        }
+        else
+        {
+            <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance
+            >
+                <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert" />
+
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <input id="id" value="@_dto.Id" class="form-control" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                <ValidationMessage For="() => _dto.Name" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Description" class="form-label">Description</label>
+                <InputTextArea id="Description" @bind-Value="_dto.Description" class="form-control" />
+                <ValidationMessage For="() => _dto.Description" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
+                <a class="btn btn-light px-3" href="/products">Back to List</a>
+            </div>
+        </EditForm>
+        }
+    </div>
+</div>
+
+@code {
+    private string _title = string.Empty;
+    private bool _loading = true;
+
+    [Parameter]
+    public int Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private ProductDto _dto { get; set; } = new();
+    private IEnumerable<CategoryDto> _categories { get; set; } = new List<CategoryDto>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _loading = true;
+        StateHasChanged();
+
+        _categories = await _categoryRepository.Get();
+
+        if (Id == 0)
+        {
+            _title = "Create";
+        }
+        else
+        {
+            _title = "Update";
+
+            _dto = await _productRepository.Get(Id);
+            if (_dto is null)
+            {
+                await _jSRuntime.ToastrError("Item not found!");
+            }
+        }
+
+        _loading = false;
+        StateHasChanged();
+    }
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task save()
+    {
+        if (Id == 0)
+        {
+            await _productRepository.Create(_dto);
+            await _jSRuntime.ToastrSuccess("Created");
+        }
+        else
+        {
+            await _productRepository.Update(_dto);
+            await _jSRuntime.ToastrSuccess("Edited");
+        }
+
+        _navigationManager.NavigateTo("/products");
+    }
+}

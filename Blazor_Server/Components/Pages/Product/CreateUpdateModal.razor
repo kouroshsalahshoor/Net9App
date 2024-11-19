@@ -1,20 +1,15 @@
 ﻿@attribute [StreamRendering]
 
-<div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
 
-            @if (_loading)
-            {
-                <_Loading />
-            }
-            else
-            {
                 <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
 
+
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">@_title Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">@_title Product</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="close"></button>
                     </div>
                     <div class="modal-body">
@@ -23,8 +18,6 @@
                             <div class="col-md-12">
                                 <DataAnnotationsValidator />
                                 <ValidationSummary class="text-danger" role="alert" />
-
-                                <_Error Message="@_errorMessage" />
 
                                 <div class="mb-3">
                                     <label for="id" class="form-label">Id</label>
@@ -46,17 +39,13 @@
                     </div>
 
                 </EditForm>
-
-            }
+            </div>
         </div>
     </div>
-</div>
 
 @code {
-    private bool _loading = true;
-    private bool _saving = false;
     private string _title = string.Empty;
-    private string _errorMessage = string.Empty;
+    private bool _loading = true;
 
     [Parameter]
     public int Id { get; set; }
@@ -65,7 +54,8 @@
     public EventCallback OnClose { get; set; }
 
     [SupplyParameterFromForm]
-    private CategoryDto _dto { get; set; } = new();
+    private ProductDto _dto { get; set; } = new();
+    private IEnumerable<CategoryDto> _categories { get; set; } = new List<CategoryDto>();
 
     public async Task Show(int id)
     {
@@ -73,12 +63,15 @@
         await _jSRuntime.InvokeVoidAsync("showModal", "exampleModalCenteredScrollable");
 
         await load();
+
     }
 
     private async Task load()
     {
         _loading = true;
         StateHasChanged();
+
+        _categories = await _categoryRepository.Get();
 
         if (Id == 0)
         {
@@ -88,7 +81,7 @@
         {
             _title = "Update";
 
-            _dto = await _categoryRepository.Get(Id);
+            _dto = await _productRepository.Get(Id);
             if (_dto is null)
             {
                 await _jSRuntime.ToastrError("Item not found!");
@@ -102,30 +95,16 @@
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task save()
     {
-        _errorMessage = string.Empty;
-        _saving = true;
-        StateHasChanged();
-
-        if (await _categoryRepository.GetByName(_dto.Name)! is not null)
+        if (Id == 0)
         {
-            _errorMessage = $"An item with the same name: {_dto.Name} already exists.";
+            await _productRepository.Create(_dto);
+            await _jSRuntime.ToastrSuccess("Created");
         }
         else
         {
-            if (Id == 0)
-            {
-                await _categoryRepository.Create(_dto);
-                await _jSRuntime.ToastrSuccess("Created");
-            }
-            else
-            {
-                await _categoryRepository.Update(_dto);
-                await _jSRuntime.ToastrSuccess("Edited");
-            }
+            await _productRepository.Update(_dto);
+            await _jSRuntime.ToastrSuccess("Edited");
         }
-
-        _saving = false;
-        StateHasChanged();
 
         await close();
     }

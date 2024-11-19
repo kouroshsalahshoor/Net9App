@@ -10,31 +10,43 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert" />
+        @if (_loading)
+        {
+            <_Loading />
+        }
+        else
+        {
+            <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
 
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input id="id" value="@_dto.Id" class="form-control" disabled />
-            </div>
+                <_Error Message="@_errorMessage" />
 
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
-                <ValidationMessage For="() => _dto.Name" class="text-danger" />
-            </div>
+                <div class="mb-3">
+                    <label for="id" class="form-label">Id</label>
+                    <input id="id" value="@_dto.Id" class="form-control" disabled />
+                </div>
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
-                <a class="btn btn-light px-3" href="/categories">Back to List</a>
-            </div>
-        </EditForm>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                    <ValidationMessage For="() => _dto.Name" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")" disabled="@_saving">@_title</button>
+                    <a class="btn btn-light px-3" href="/categories">Back to List</a>
+                </div>
+            </EditForm>
+        }
     </div>
 </div>
 
 @code {
+    private bool _loading = true;
+    private bool _saving = false;
     private string _title = string.Empty;
+    private string _errorMessage = string.Empty;
 
     [Parameter]
     public int Id { get; set; }
@@ -44,6 +56,9 @@
 
     protected override async Task OnParametersSetAsync()
     {
+        _loading = true;
+        StateHasChanged();
+
         if (Id == 0)
         {
             _title = "Create";
@@ -58,22 +73,42 @@
                 await _jSRuntime.ToastrError("Item not found!");
             }
         }
+
+        _loading = false;
+        StateHasChanged();
     }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task save()
     {
-        if (Id == 0)
+        _errorMessage = string.Empty;
+        _saving = true;
+        StateHasChanged();
+
+        // await Task.Delay(3000);
+
+        var dto = await _categoryRepository.GetByName(_dto.Name)!;
+        if (dto is not null && Id != dto.Id)
         {
-            await _categoryRepository.Create(_dto);
-            await _jSRuntime.ToastrSuccess("Created");
+            _errorMessage = $"An item with the same name: {_dto.Name} already exists.";
         }
         else
         {
-            await _categoryRepository.Update(_dto);
-            await _jSRuntime.ToastrSuccess("Edited");
+            if (Id == 0)
+            {
+                await _categoryRepository.Create(_dto);
+                await _jSRuntime.ToastrSuccess("Created");
+            }
+            else
+            {
+                await _categoryRepository.Update(_dto);
+                await _jSRuntime.ToastrSuccess("Edited");
+            }
+
+            _navigationManager.NavigateTo("/categories");
         }
 
-        _navigationManager.NavigateTo("/categories");
+        _saving = false;
+        StateHasChanged();
     }
 }
