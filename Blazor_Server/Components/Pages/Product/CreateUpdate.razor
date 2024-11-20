@@ -1,5 +1,7 @@
 ﻿@page "/product/create"
 @page "/product/update/{id:int}"
+@using System.IO
+@inject IFileUpload _fileUpload
 
 @attribute [StreamRendering]
 
@@ -39,8 +41,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Category</label>
-                    <InputSelect @bind-Value="_dto.CategoryId" class="form-select">
+                    <label for="Category" class="form-label">Category</label>
+                    <InputSelect @bind-Value="_dto.CategoryId" class="form-select" id="Category">
                         <option value="0" disabled="disabled" selected>-- Please select a Category --</option>
                         @foreach (var item in _categories)
                         {
@@ -48,6 +50,20 @@
                         }
                     </InputSelect>
                     <ValidationMessage For="() => _dto.CategoryId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <InputFile id="image" OnChange="loadFiles" class="form-control" accept="image/x-png,image/jpeg,image/x-jpeg" />
+                    <ValidationMessage For="() => _dto.ImageUrl" class="text-danger" />
+
+                    @if (string.IsNullOrEmpty(_dto.ImageUrl) == false)
+                    {
+                        <div class="row m-3">
+                            <img src="@_dto.ImageUrl" alt="" class="img-thumbnail" />
+                            <i class="bi-trash btn btn-outline-danger" @onclick="removeImage">remove</i>
+                        </div>
+                    }
                 </div>
 
                 <div class="mb-3">
@@ -62,6 +78,7 @@
 @code {
     private string _title = string.Empty;
     private bool _loading = true;
+    private bool _imageLoading = true;
 
     [Parameter]
     public int Id { get; set; }
@@ -110,5 +127,54 @@
         }
 
         _navigationManager.NavigateTo("/products");
+    }
+
+    private async Task loadFiles(InputFileChangeEventArgs args)
+    {
+        _imageLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            if (args.GetMultipleFiles().Count > 0)
+            {
+                foreach (var file in args.GetMultipleFiles())
+                {
+                    var fileInfo = new FileInfo(file.Name);
+                    var fileExt = fileInfo.Extension.ToLower();
+                    if (fileExt == ".jpg" || fileExt == ".png" || fileExt == ".jpeg")
+                    {
+                        _dto.ImageUrl = await _fileUpload.UploadFile(file);
+                    }
+                    else
+                    {
+                        await _jSRuntime.ToastrError("Please upload .jpg .png .jpeg files only");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await _jSRuntime.ToastrError(ex.Message);
+        }
+
+        _imageLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task removeImage()
+    {
+        if (string.IsNullOrEmpty(_dto.ImageUrl) == false)
+        {
+            if (_fileUpload.DeleteFile(_dto.ImageUrl))
+            {
+                _dto.ImageUrl = string.Empty;
+                await _jSRuntime.ToastrSuccess("Image deleted");
+            }
+            else
+            {
+                await _jSRuntime.ToastrWarning("No Image found!");
+            }
+        }
     }
 }
