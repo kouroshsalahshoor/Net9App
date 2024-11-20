@@ -1,6 +1,8 @@
 using Application.Repository;
 using Blazor_Server.Components;
 using Blazor_Server.Components.Account;
+using Blazor_Server.Service;
+using Blazor_Server.Service.IService;
 using Domain;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -45,6 +47,8 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IFileUpload, FileUpload>();
 
 var app = builder.Build();
 

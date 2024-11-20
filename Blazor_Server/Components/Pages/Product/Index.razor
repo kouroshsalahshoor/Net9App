@@ -31,9 +31,14 @@ else
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Name</td>
-                    <td>@item.Category.Name</td>
+                    <td>@item.Category!.Name</td>
                     <td>@item.Description</td>
-                    <td>@item.ImageUrl</td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.ImageUrl) == false)
+                        {
+                            <img src="@item.ImageUrl" alt="" class="img-thumbnail" width="100" />
+                        }
+                    </td>
                     <td>
                         <a class="btn btn-warning px-3" href="product/update/@item.Id">Update</a>
                         <button class="btn btn-warning px-3" @onclick="async () => await _createUpdateModal.Show(item.Id)">Update Modal</button>
@@ -67,7 +72,7 @@ else
     {
         _loading = true;
 
-        _items = (await _productRepository.Get()).OrderByDescending(x=>x.Id).ToList();
+        _items = (await _productRepository.Get()).OrderByDescending(x => x.Id).ToList();
 
         _loading = false;
         StateHasChanged();
