@@ -67,7 +67,7 @@ else
     {
         _loading = true;
 
-        _items = await _productRepository.Get();
+        _items = (await _productRepository.Get()).OrderByDescending(x=>x.Id).ToList();
 
         _loading = false;
         StateHasChanged();

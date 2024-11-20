@@ -16,33 +16,45 @@
         }
         else
         {
-            <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance
-            >
+            <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
+
                 <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert" />
+                <ValidationSummary class="text-danger" role="alert" />
 
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input id="id" value="@_dto.Id" class="form-control" disabled />
-            </div>
+                <div class="mb-3">
+                    <label for="id" class="form-label">Id</label>
+                    <input id="id" value="@_dto.Id" class="form-control" disabled />
+                </div>
 
-            <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
-                <ValidationMessage For="() => _dto.Name" class="text-danger" />
-            </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                    <ValidationMessage For="() => _dto.Name" class="text-danger" />
+                </div>
 
-            <div class="mb-3">
-                <label for="Description" class="form-label">Description</label>
-                <InputTextArea id="Description" @bind-Value="_dto.Description" class="form-control" />
-                <ValidationMessage For="() => _dto.Description" class="text-danger" />
-            </div>
+                <div class="mb-3">
+                    <label for="Description" class="form-label">Description</label>
+                    <InputTextArea id="Description" @bind-Value="_dto.Description" class="form-control" />
+                    <ValidationMessage For="() => _dto.Description" class="text-danger" />
+                </div>
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
-                <a class="btn btn-light px-3" href="/products">Back to List</a>
-            </div>
-        </EditForm>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Category</label>
+                    <InputSelect @bind-Value="_dto.CategoryId" class="form-select">
+                        <option value="0" disabled="disabled" selected>-- Please select a Category --</option>
+                        @foreach (var item in _categories)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="() => _dto.CategoryId" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
+                    <a class="btn btn-light px-3" href="/products">Back to Index</a>
+                </div>
+            </EditForm>
         }
     </div>
 </div>
@@ -65,11 +77,10 @@
 
         _categories = await _categoryRepository.Get();
 
-        if (Id == 0)
-        {
-            _title = "Create";
-        }
-        else
+        _title = "Create";
+        _dto = new();
+
+        if (Id > 0)
         {
             _title = "Update";
 
@@ -95,7 +106,7 @@
         else
         {
             await _productRepository.Update(_dto);
-            await _jSRuntime.ToastrSuccess("Edited");
+            await _jSRuntime.ToastrSuccess("Updated");
         }
 
         _navigationManager.NavigateTo("/products");

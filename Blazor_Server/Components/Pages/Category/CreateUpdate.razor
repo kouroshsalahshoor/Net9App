@@ -35,7 +35,7 @@
 
                 <div class="mb-3">
                     <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")" disabled="@_saving">@_title</button>
-                    <a class="btn btn-light px-3" href="/categories">Back to List</a>
+                    <a class="btn btn-light px-3" href="/categories">Back to Index</a>
                 </div>
             </EditForm>
         }
@@ -102,7 +102,7 @@
             else
             {
                 await _categoryRepository.Update(_dto);
-                await _jSRuntime.ToastrSuccess("Edited");
+                await _jSRuntime.ToastrSuccess("Updated");
             }
 
             _navigationManager.NavigateTo("/categories");

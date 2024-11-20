@@ -1,47 +1,65 @@
 ﻿@attribute [StreamRendering]
 
-    <div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" style="display: none;" aria-hidden="true">
 
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
 
-                <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
+            <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
 
 
-                    <div class="modal-header">
+                <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">@_title Product</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="close"></button>
-                    </div>
-                    <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="close"></button>
+                </div>
+                <div class="modal-body">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <DataAnnotationsValidator />
-                                <ValidationSummary class="text-danger" role="alert" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary class="text-danger" role="alert" />
 
-                                <div class="mb-3">
-                                    <label for="id" class="form-label">Id</label>
-                                    <input id="id" value="@_dto.Id" class="form-control" disabled />
-                                </div>
+                            <div class="mb-3">
+                                <label for="id" class="form-label">Id</label>
+                                <input id="id" value="@_dto.Id" class="form-control" disabled />
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
-                                    <ValidationMessage For="() => _dto.Name" class="text-danger" />
-                                </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <InputText id="name" @bind-Value="_dto.Name" class="form-control" />
+                                <ValidationMessage For="() => _dto.Name" class="text-danger" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Description" class="form-label">Description</label>
+                                <InputTextArea id="Description" @bind-Value="_dto.Description" class="form-control" />
+                                <ValidationMessage For="() => _dto.Description" class="text-danger" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Category</label>
+                                <InputSelect @bind-Value="_dto.CategoryId" class="form-select">
+                                    <option value="0" disabled="disabled" selected>-- Please select a Category --</option>
+                                    @foreach (var item in _categories)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="() => _dto.CategoryId" class="text-danger" />
                             </div>
                         </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal" @onclick="close">Close</button>
-                        <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
                     </div>
 
-                </EditForm>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal" @onclick="close">Close</button>
+                    <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
+                </div>
+
+            </EditForm>
         </div>
     </div>
+</div>
 
 @code {
     private string _title = string.Empty;

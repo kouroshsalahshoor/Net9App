@@ -15,11 +15,16 @@ public class ProductRepository : IProductRepository
     {
         _db = db;
 
-        var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDto>().ReverseMap());
+        var config = new MapperConfiguration(x =>
+        {
+            x.CreateMap<Category, CategoryDto>().ReverseMap();
+            x.CreateMap<Product, ProductDto>().ReverseMap();
+        });
         _mapper = config.CreateMapper();
     }
     public async Task<ProductDto> Create(ProductDto dto)
     {
+        dto.Category = null;
         Product model = _mapper.Map<Product>(dto);
 
         await _db.Products.AddAsync(model);
@@ -30,7 +35,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<int> Delete(int id)
     {
-        var model = await _db.Products.FirstOrDefaultAsync(x=> x.Id == id);
+        var model = await _db.Products.FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             _db.Products.Remove(model);
@@ -41,7 +46,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<ProductDto> Get(int id)
     {
-        var model = await _db.Products.Include(x=> x.Category).FirstOrDefaultAsync(x => x.Id == id);
+        var model = await _db.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<ProductDto>(model);
@@ -51,7 +56,9 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<ProductDto>> Get()
     {
-        return _mapper.Map<IEnumerable<ProductDto>>(_db.Products.Include(x => x.Category));
+        var models = await _db.Products.Include(x => x.Category).ToListAsync();
+        var dtos = _mapper.Map<IEnumerable<ProductDto>>(models);
+        return dtos;
     }
 
     public async Task<ProductDto> Update(ProductDto dto)
