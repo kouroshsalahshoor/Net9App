@@ -69,14 +69,14 @@
                         else
                         {
                             <img src="@_dto.ImageUrl" alt="" class="img-thumbnail" width="200" />
-                            <i class="bi-trash btn btn-outline-danger" @onclick="removeImage">remove</i>
+                            <i class="bi bi-trash btn btn-outline-danger" @onclick="removeImage">remove</i>
                         }
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")">@_title</button>
-                    <a class="btn btn-light px-3" href="/products">Back to Index</a>
+                    <button type="submit" class="btn btn-@(_title == "Create" ? "primary" : "warning")"><i class="bi bi-floppy"></i> @_title</button>
+                    <a class="btn btn-light px-3" href="/products"><i class="bi bi-list-nested"></i> Back to Index</a>
                 </div>
             </EditForm>
         }
