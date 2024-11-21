@@ -8,5 +8,7 @@ public class Product
     public string ImageUrl { get; set; } = string.Empty;
     public int CategoryId { get; set; }
     public Category? Category { get; set; }
+    public IEnumerable<ProductPrice> ProductPrices { get; set; }
+    //public ICollection<ProductPrice> ProductPrices { get; set; }
 
 }

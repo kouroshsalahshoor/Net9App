@@ -42,6 +42,7 @@ else
                         </td>
                         <td class="fit">
                             <a class="btn btn-warning px-3" href="product/update/@item.Id"><i class="bi bi-pencil-square"></i> Update</a>
+                            <a class="btn btn-success px-3" href="product/@item.Id/price"><i class=""></i> Price</a>
                             <button class="btn btn-warning px-3" @onclick="async () => await _createUpdateModal.Show(item.Id)"><i class="bi bi-pencil-square"></i> Update Modal</button>
                             <button class="btn btn-danger px-3" @onclick="async () => await delete(item.Id)"><i class="bi bi-trash"></i> Delete</button>
                         </td>
