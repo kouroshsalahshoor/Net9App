@@ -52,14 +52,14 @@ public class CategoryRepository : ICategoryRepository
         return 0;
     }
 
-    public async Task<CategoryDto> Get(int id)
+    public async Task<CategoryDto?> Get(int id)
     {
         var model = await _db.Categories.FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<CategoryDto>(model);
         }
-        return new CategoryDto();
+        return null;
     }
 
     public async Task<CategoryDto>? GetByName(string name)

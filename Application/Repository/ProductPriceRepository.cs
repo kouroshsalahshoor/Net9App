@@ -40,14 +40,14 @@ public class ProductPriceRepository : IProductPriceRepository
         return 0;
     }
 
-    public async Task<ProductPriceDto> Get(int id)
+    public async Task<ProductPriceDto?> Get(int id)
     {
         var model = await _db.ProductPrices.FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<ProductPriceDto>(model);
         }
-        return new ProductPriceDto();
+        return null;
     }
 
     public async Task<IEnumerable<ProductPriceDto>> GetForProductId(int productId)

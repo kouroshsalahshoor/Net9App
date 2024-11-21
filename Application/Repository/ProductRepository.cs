@@ -44,14 +44,14 @@ public class ProductRepository : IProductRepository
         return 0;
     }
 
-    public async Task<ProductDto> Get(int id)
+    public async Task<ProductDto?> Get(int id)
     {
         var model = await _db.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<ProductDto>(model);
         }
-        return new ProductDto();
+        return null;
     }
 
     public async Task<IEnumerable<ProductDto>> Get()
