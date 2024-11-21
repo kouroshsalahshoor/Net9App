@@ -13,4 +13,6 @@ public class ProductDto
     [Range(1,int.MaxValue, ErrorMessage = "Please select a Category")]
     public int CategoryId { get; set; }
     public CategoryDto? Category { get; set; }
+    public IEnumerable<ProductPriceDto> ProductPrices { get; set; }
+
 }

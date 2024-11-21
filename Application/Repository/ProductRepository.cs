@@ -19,6 +19,7 @@ public class ProductRepository : IProductRepository
         {
             x.CreateMap<Category, CategoryDto>().ReverseMap();
             x.CreateMap<Product, ProductDto>().ReverseMap();
+            x.CreateMap<ProductPrice, ProductPriceDto>().ReverseMap();
         });
         _mapper = config.CreateMapper();
     }
@@ -46,7 +47,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<ProductDto?> Get(int id)
     {
-        var model = await _db.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
+        var model = await _db.Products.Include(x => x.Category).Include(x => x.ProductPrices).FirstOrDefaultAsync(x => x.Id == id);
         if (model is not null)
         {
             return _mapper.Map<ProductDto>(model);
@@ -56,7 +57,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<ProductDto>> Get()
     {
-        var models = await _db.Products.Include(x => x.Category).ToListAsync();
+        var models = await _db.Products.Include(x => x.Category).Include(x => x.ProductPrices).ToListAsync();
         var dtos = _mapper.Map<IEnumerable<ProductDto>>(models);
         return dtos;
     }
