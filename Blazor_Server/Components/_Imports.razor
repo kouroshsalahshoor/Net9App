@@ -17,8 +17,11 @@
 @using Application.Repository
 @using Blazor_Server.Service.IService
 
+@using System.IO
+
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jSRuntime
 
 @inject ICategoryRepository _categoryRepository
 @inject IProductRepository _productRepository
+@inject IFileUpload _fileUpload
