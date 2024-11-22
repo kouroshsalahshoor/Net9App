@@ -8,3 +8,14 @@
 @using Microsoft.JSInterop
 @using Blazor_Wasm
 @using Blazor_Wasm.Layout
+
+@using Domain.Dtos
+@using Blazor_Wasm.Service.IService
+@using Blazor_Wasm.Extensions
+@using Blazor_Wasm.Shared
+
+@inject IJSRuntime _jSRuntime
+@inject NavigationManager _navigationManager
+
+@inject IProductService _productService
+@inject ICategoryService _categoryService
