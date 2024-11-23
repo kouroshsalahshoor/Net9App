@@ -1,0 +1,40 @@
+﻿@page "/WebPageContent"
+@attribute [StreamRendering]
+
+<PageTitle>@_title</PageTitle>
+
+<h3>@_title</h3>
+
+@if (_loading)
+{
+    <_Loading />
+}
+else
+{
+    <p>@_content</p>
+}
+
+@code {
+    private string _title = "WebPageContent";
+    private bool _loading = false;
+
+    private string _content;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await load();
+    }
+
+    private async Task load()
+    {
+        _loading = true;
+        StateHasChanged();
+
+        await Task.Delay(3000);
+
+        _content = await _webPageContentService.Get();
+
+        _loading = false;
+        StateHasChanged();
+    }
+}

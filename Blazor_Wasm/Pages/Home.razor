@@ -1,7 +1,54 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>@_title</PageTitle>
 
-<h1>Hello, world!</h1>
+@if (_loading)
+{
+    <div style="position:fixed;top:50%;left:50%;margin-top:-50px;margin-left:-100px;">
+        <img src="images/ajax-loader.gif" />
+    </div>
+}
+else
+{
+    if (_items is null || _items.Count() == 0)
+    {
+        <p>No items</p>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row  py-3">
+                @foreach (var category in _items.Select(x=>x.Category!.Name).Distinct())
+                {
+                    <h2 class="text-success pl-1"><b>@category</b></h2>
 
-Welcome to your new app.
+                    @foreach (var product in _items.Where(x=>x.Category!.Name == category))
+                    {
+                        <div class="card col-md-2 m-1">
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                            <div class="card-body">
+                                <h5 class="card-title">@product.Name</h5>
+                                <p class="card-text">@product.Description</p>
+                                <a href="#" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    }
+                }
+            </div> 
+        </div>
+    }
+}
+
+@code {
+    private string _title = "Home";
+    private bool _loading = true;
+
+    private IEnumerable<ProductDto>? _items = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _loading = true;
+        _items = await _productService.Get();
+        _loading = false;
+    }
+}

@@ -9,10 +9,14 @@ namespace Blazor_Wasm.Service
     public class ProductService : IProductService
     {
         private readonly HttpClient _httpClient;
+        private readonly IConfiguration _configuration;
+        private readonly string _baseServerUrl;
 
-        public ProductService(HttpClient httpClient)
+        public ProductService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
+            _configuration = configuration;
+            _baseServerUrl = _configuration.GetSection("BaseServerUrl").Value!;
         }
         public async Task<IEnumerable<ProductDto>?> Get()
         {
@@ -20,7 +24,12 @@ namespace Blazor_Wasm.Service
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<ProductDto>>(content);
+                var dtos = JsonConvert.DeserializeObject<List<ProductDto>>(content);
+                foreach (var dto in dtos!)
+                {
+                    dto.ImageUrl = _baseServerUrl + dto.ImageUrl;
+                }
+                return dtos;
             }
 
             return null;
@@ -33,7 +42,11 @@ namespace Blazor_Wasm.Service
 
             if (response.IsSuccessStatusCode)
             {
-                return JsonConvert.DeserializeObject<ProductDto>(content);
+                var dto = JsonConvert.DeserializeObject<ProductDto>(content);
+
+                dto.ImageUrl = _baseServerUrl + dto.ImageUrl;
+
+                return dto;
             }
             else
             {
