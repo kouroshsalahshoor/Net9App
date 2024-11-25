@@ -1,0 +1,35 @@
+﻿@page "/CurrentLocation"
+
+<PageTitle>@_title</PageTitle>
+
+<button class="btn btn-primary mb-3" @onclick="GetLocation">Get location</button>
+
+@if (_loading)
+{
+    <_Loading />
+}
+
+<p>longitude: @_longitude</p>
+<p>latitude: @_latitude</p>
+
+@code {
+    private string _title = "Current Location";
+    private bool _loading = false;
+
+    private double _longitude = 0;
+    private double _latitude = 0;
+
+    private async Task GetLocation()
+    {
+        _loading = true;
+        // StateHasChanged();
+
+        var response = await _jSRuntime.InvokeAsync<string>("getCoords");
+        var coords = response.Split(",");
+        _longitude = double.Parse(coords[0].ToString()!);
+        _latitude = double.Parse(coords[1].ToString()!);
+
+        _loading = false;
+        // StateHasChanged();
+    }
+}
