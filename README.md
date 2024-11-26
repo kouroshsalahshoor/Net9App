@@ -21,3 +21,5 @@
 
 ## Based on:
 [Blazor - The Complete Guide [.NET 9] [E-commerce]](https://www.dotnetmastery.com/Home/Details?courseId=24)
+
+[Udemy – Handling Long-Running Tasks in .NET Core 2023-7](https://downloadlynet.ir/2024/04/134079/08/handling-long-running-tasks-in-net-core/19/?#/134079-udemy-132411112126.html)
