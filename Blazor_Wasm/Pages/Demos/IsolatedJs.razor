@@ -1,0 +1,19 @@
+﻿@page "/isolatedJs"
+
+<h3>@_title</h3>
+<hr />
+<h1 class="text-info">Time: @_timeNow</h1>
+
+@code {
+    private string _title = "Isolated Js";
+    private string? _timeNow { get; set; }
+    private IJSObjectReference? _module { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _module = await _jSRuntime.InvokeAsync<IJSObjectReference>("import", "/js/isolated.js");
+
+        var offsetMinutes = await _module.InvokeAsync<double>("getLocalOffsetminutes");
+        _timeNow = DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(offsetMinutes)).ToString("HH:mm");
+    }
+}
