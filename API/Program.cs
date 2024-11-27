@@ -1,4 +1,5 @@
 using Application.Repository;
+using Application.Repository.IRepository;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +22,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
 //https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-9.0
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var _allowSpecificOrigins = "MyAllowSpecificOrigins";
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("open",
+//        builder => builder.AllowAnyOrigin().AllowAnyHeader());
+//});
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
+    options.AddPolicy(name: _allowSpecificOrigins,
                       policy =>
                       {
                           policy.WithOrigins("https://localhost:7207",
-                                                    "http://www.contoso.com")
+                                                    "http://www.xxx.com")
                                                     .AllowAnyHeader()
                                                     .AllowAnyMethod();
                       });
@@ -50,7 +61,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(_allowSpecificOrigins);
 
 app.UseAuthorization();
 

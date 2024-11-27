@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.BethanysPieShopHR;
 
@@ -18,17 +19,17 @@ public class Employee
     [Required]
     [EmailAddress]
     public string Email { get; set; } = string.Empty;
-    public string Street { get; set; } = string.Empty;
-    public string Zip { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
+    public string? Street { get; set; }
+    public string? Zip { get; set; }
+    public string? City { get; set; }
     public int CountryId { get; set; }
     public Country? Country { get; set; }
-    public string PhoneNumber { get; set; } = string.Empty;
+    public string? PhoneNumber { get; set; }
     public bool Smoker { get; set; }
     public MaritalStatus MaritalStatus { get; set; }
     public Gender Gender { get; set; }
     [StringLength(1000, ErrorMessage = "Comment length can't exceed 1000 characters.")]
-    public string Comment { get; set; } = string.Empty;
+    public string? Comment { get; set; }
     public DateTime? JoinedDate { get; set; }
     public DateTime? ExitDate { get; set; }
 
@@ -37,4 +38,8 @@ public class Employee
 
     public double Latitude { get; set; }
     public double Longitude { get; set; }
+
+    [NotMapped]
+    public byte[]? ImageContent { get; set; }
+    public string? ImageName { get; set; }
 }

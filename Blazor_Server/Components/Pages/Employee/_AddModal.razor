@@ -1,0 +1,85 @@
+﻿@if (_show)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">Employee Quick Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @onclick="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <EditForm Model="@_model" OnValidSubmit="@HandleValidSubmit">
+
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        <div class="form-group">
+                            <label for="lastName">Last name: </label>
+                            <InputText id="lastName" class="form-control" @bind-Value="@_model.LastName" placeholder="Enter last name"></InputText>
+                            <ValidationMessage For="@(() => _model.LastName)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstName">First name: </label>
+                            <InputText id="firstName" class="form-control" @bind-Value="@_model.FirstName" placeholder="Enter first name"></InputText>
+                            <ValidationMessage For="@(() => _model.FirstName)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <InputText id="email" class="form-control" @bind-Value="@_model.Email" placeholder="Enter email"></InputText>
+                            <ValidationMessage For="@(() => _model.Email)" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save employee</button>
+                        <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                    </EditForm>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    public bool _show { get; set; }
+
+    public Employee _model { get; set; } = new Employee { CountryId = 1, JobCategoryId = 1, BirthDate = DateTime.Now, JoinedDate = DateTime.Now };
+
+    [Parameter]
+    public EventCallback<bool> CloseEventCallback { get; set; }
+
+    [Inject]
+    public IEmployeeService _employeeService { get; set; }
+
+
+
+    public void Show()
+    {
+        ResetDialog();
+        _show = true;
+        StateHasChanged();
+    }
+
+    private void ResetDialog()
+    {
+        _model = new Employee { CountryId = 1, JobCategoryId = 1, BirthDate = DateTime.Now, JoinedDate = DateTime.Now };
+    }
+
+    public void Close()
+    {
+        _show = false;
+        StateHasChanged();
+    }
+
+    protected async Task HandleValidSubmit()
+    {
+        await _employeeService.Add(_model);
+        _show = false;
+
+        await CloseEventCallback.InvokeAsync(true);
+        StateHasChanged();
+    }
+}

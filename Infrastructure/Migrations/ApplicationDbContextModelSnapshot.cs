@@ -87,6 +87,237 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.BethanysPieShopHR.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Belgium"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Germany"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Netherlands"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "USA"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Japan"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "China"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "UK"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "France"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Brazil"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.BethanysPieShopHR.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExitDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("JoinedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("float");
+
+                    b.Property<int>("MaritalStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Smoker")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("JobCategoryId");
+
+                    b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(1979, 1, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = "Brussels",
+                            Comment = "Lorem Ipsum",
+                            CountryId = 1,
+                            Email = "bethany@bethanyspieshop.com",
+                            FirstName = "Bethany",
+                            Gender = 1,
+                            JobCategoryId = 1,
+                            JoinedDate = new DateTime(2015, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Smith",
+                            Latitude = 50.850299999999997,
+                            Longitude = 4.3517000000000001,
+                            MaritalStatus = 1,
+                            PhoneNumber = "324777888773",
+                            Smoker = false,
+                            Street = "Grote Markt 1",
+                            Zip = "1000"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.BethanysPieShopHR.JobCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JobCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Pie research"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Sales"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Management"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Store staff"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Finance"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "QA"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "IT"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Cleaning"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Bakery"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -293,6 +524,25 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.BethanysPieShopHR.Employee", b =>
+                {
+                    b.HasOne("Domain.BethanysPieShopHR.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.BethanysPieShopHR.JobCategory", "JobCategory")
+                        .WithMany()
+                        .HasForeignKey("JobCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("JobCategory");
                 });
 
             modelBuilder.Entity("Domain.Product", b =>
