@@ -1,0 +1,70 @@
+﻿@page "/employees"
+
+<h1 class="page-title">All employees</h1>
+
+@if (Employees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Employee ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Employees)
+            {
+                <tr>
+                    <td><img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.Id}-small.jpg")" class="rounded-circle" /></td>
+                    <td>@employee.Id</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>
+                        <a href="@($"employeedetail/{employee.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a href="@($"employeeedit/{employee.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<button @onclick="@QuickAddEmployee" class="btn btn-dark table-btn quick-add-btn">&nbsp;&nbsp;+&nbsp;&nbsp;</button>
+
+<_AddModal @ref="_addModal" CloseEventCallback="@addModal_OnDialogClose"></_AddModal>
+
+@code {
+    [Inject]
+    public IEmployeeService _employeeService { get; set; }
+
+    public List<Employee> Employees { get; set; }
+
+    protected _AddModal _addModal { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Employees = (await _employeeService.Get()).ToList();
+    }
+
+    public async void addModal_OnDialogClose()
+    {
+        Employees = (await _employeeService.Get()).ToList();
+        StateHasChanged();
+    }
+
+    protected void QuickAddEmployee()
+    {
+        _addModal.Show();
+    }
+}

@@ -52,6 +52,24 @@ builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IJobCategoryService, JobCategoryService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
+
+var apiUrl = new Uri(builder.Configuration.GetValue<string>("ApiUrl")!);
+builder.Services.AddHttpClient<IEmployeeService, EmployeeService>(client =>
+{
+    client.BaseAddress = apiUrl;
+});
+builder.Services.AddHttpClient<ICountryService, CountryService>(client =>
+{
+    client.BaseAddress = apiUrl;
+});
+builder.Services.AddHttpClient<IJobCategoryService, JobCategoryService>(client =>
+{
+    client.BaseAddress = apiUrl;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
