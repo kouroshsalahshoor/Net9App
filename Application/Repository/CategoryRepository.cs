@@ -22,23 +22,14 @@ public class CategoryRepository : ICategoryRepository
     public async Task<CategoryDto> Create(CategoryDto dto)
     {
         Category model = _mapper.Map<Category>(dto);
-        model.CreatedDate = DateTime.Now;
-        //Category model = new()
-        //{
-        //    Id = dto.Id,
-        //    Name = dto.Name,
-        //    CreatedDate = DateTime.Now,
-        //};
+
+        model.CreatedBy = "";
+        model.CreatedOn = DateTime.Now;
 
         await _db.Categories.AddAsync(model);
         await _db.SaveChangesAsync();
 
         return _mapper.Map<CategoryDto>(model);
-        //return new CategoryDto
-        //{
-        //    Id = model.Id,
-        //    Name = model.Name,
-        //};
     }
 
     public async Task<int> Delete(int id)
@@ -86,6 +77,9 @@ public class CategoryRepository : ICategoryRepository
         if (model is not null)
         {
             model.Name = dto.Name;
+
+            model.LastModifiedBy = "";
+            model.LastModifiedOn = DateTime.Now;
 
             _db.Categories.Update(model);
             await _db.SaveChangesAsync();

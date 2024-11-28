@@ -1,6 +1,8 @@
-﻿namespace Core.BethanysPieShopHR;
+﻿using Core.Common;
 
-public class Country
+namespace Core.BethanysPieShopHR;
+
+public class Country : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

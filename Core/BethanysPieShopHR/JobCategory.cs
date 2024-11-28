@@ -1,6 +1,8 @@
-﻿namespace Core.BethanysPieShopHR;
+﻿using Core.Common;
 
-public class JobCategory
+namespace Core.BethanysPieShopHR;
+
+public class JobCategory : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; }

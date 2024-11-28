@@ -13,7 +13,7 @@ public class JobCategoryRepository : IJobCategoryRepository
         _db = db;
     }
 
-    public IEnumerable<JobCategory> Get() => _db.JobCategories;
+    public async Task<IEnumerable<JobCategory>> Get() => _db.JobCategories;
 
-    public JobCategory Get(int id) => _db.JobCategories.FirstOrDefault(c => c.Id == id)!;
+    public async Task<JobCategory> Get(int id) => _db.JobCategories.FirstOrDefault(c => c.Id == id)!;
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Repository.IRepository;
 using Core.BethanysPieShopHR;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Repository;
 
@@ -13,26 +14,29 @@ public class EmployeeRepository : IEmployeeRepository
         _db = db;
     }
 
-    public IEnumerable<Employee> Get()
+    public async Task<IEnumerable<Employee>> Get()
     {
-        return _db.Employees;
+        return await _db.Employees.ToListAsync();
     }
 
-    public Employee? Get(int id)
+    public async Task<Employee?> Get(int id)
     {
-        return _db.Employees.FirstOrDefault(c => c.Id == id);
+        return await _db.Employees.FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public Employee Add(Employee model)
+    public async Task<Employee> Add(Employee model)
     {
-        var addedEntity = _db.Employees.Add(model);
-        _db.SaveChanges();
+        model.CreatedBy = "";
+        model.CreatedOn = DateTime.Now;
+
+        var addedEntity = await _db.Employees.AddAsync(model);
+        await _db.SaveChangesAsync();
         return addedEntity.Entity;
     }
 
-    public Employee? Update(Employee model)
+    public async Task<Employee?> Update(Employee model)
     {
-        var foundModel = _db.Employees.FirstOrDefault(e => e.Id == model.Id);
+        var foundModel = await _db.Employees.FirstOrDefaultAsync(e => e.Id == model.Id);
 
         if (foundModel != null)
         {
@@ -53,7 +57,10 @@ public class EmployeeRepository : IEmployeeRepository
             foundModel.ExitDate = model.ExitDate;
             foundModel.JoinedDate = model.JoinedDate;
 
-            _db.SaveChanges();
+            foundModel.LastModifiedBy = "";
+            foundModel.LastModifiedOn = DateTime.Now;
+
+            await _db.SaveChangesAsync();
 
             return foundModel;
         }
@@ -61,12 +68,12 @@ public class EmployeeRepository : IEmployeeRepository
         return null;
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var foundEmployee = _db.Employees.FirstOrDefault(e => e.Id == id);
+        var foundEmployee = await _db.Employees.FirstOrDefaultAsync(e => e.Id == id);
         if (foundEmployee == null) return;
 
         _db.Employees.Remove(foundEmployee);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
     }
 }

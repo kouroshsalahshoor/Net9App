@@ -4,9 +4,9 @@ namespace Application.Repository.IRepository;
 
 public interface IEmployeeRepository
 {
-    IEnumerable<Employee> Get();
-    Employee? Get(int id);
-    Employee Add(Employee model);
-    Employee? Update(Employee model);
-    void Delete(int id);
+    Task<IEnumerable<Employee>> Get();
+    Task<Employee?> Get(int id);
+    Task<Employee> Add(Employee model);
+    Task<Employee?> Update(Employee model);
+    Task Delete(int id);
 }

@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Core.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.BethanysPieShopHR;
 
-public class Employee
+public class Employee : AuditableEntity
 {
     public int Id { get; set; }
     [Required]

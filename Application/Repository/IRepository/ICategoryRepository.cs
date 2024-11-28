@@ -1,7 +1,9 @@
-﻿using Core.Dtos;
+﻿using Core;
+using Core.Dtos;
 
 namespace Application.Repository;
 
+//public interface ICategoryRepository : IRepository<Category>
 public interface ICategoryRepository
 {
     Task<CategoryDto> Create(CategoryDto dto);
