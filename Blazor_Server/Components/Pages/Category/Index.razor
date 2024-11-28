@@ -9,7 +9,7 @@
 <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Search by Name" aria-label="Search" aria-describedby="button-addon2"
            @bind-value="_searchText" @bind-value:event="oninput">
-    <span class="input-group-text bg-warning text-light" id="basic-addon2"><i class="bi bi-search"></i> Search</span>
+    <span class="input-group-text bg-warning text-light" id="basic-addon2" title="Search"><i class="bi bi-search"></i></span>
         @* <button class="btn btn-warning" type="button" id="button-addon2">
         <i class="bi bi-search"></i>
         Search
@@ -28,8 +28,8 @@ else
                 <th>Id</th>
                 <th>Name</th>
                 <th>
-                    <a class="btn btn-primary px-3" href="category/create">Create</a>
-                    <button class="btn btn-primary px-3" @onclick="async () => await _createUpdateModal.Show(0)">Create Modal</button>
+                    <a class="btn btn-primary btn-sm" href="category/create" title="Create"><i class="bi bi-plus-square"></i></a>
+                    <button class="btn btn-outline-primary btn-sm" @onclick="async () => await _createUpdateModal.Show(0)" title="Create Modal"><i class="bi bi-plus-square"></i></button>
                 </th>
             </tr>
         </thead>
@@ -39,10 +39,10 @@ else
                 <tr>
                     <td>@item.Id</td>
                     <td>@item.Name</td>
-                    <td>
-                        <a class="btn btn-warning px-3" href="category/update/@item.Id">Update</a>
-                        <button class="btn btn-warning px-3" @onclick="async () => await _createUpdateModal.Show(item.Id)">Update Modal</button>
-                        <button class="btn btn-danger px-3" @onclick="async () => await delete(item.Id)">Delete</button>
+                    <td class="fit">
+                        <a class="btn btn-warning btn-sm" href="category/update/@item.Id" title="Update"><i class="bi bi-pencil"></i></a>
+                        <button class="btn btn-outline-warning btn-sm" @onclick="async () => await _createUpdateModal.Show(item.Id)" title="Update Modal"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-danger btn-sm" @onclick="async () => await delete(item.Id)" title="Delete"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             }
