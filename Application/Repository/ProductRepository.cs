@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Domain;
-using Domain.Dtos;
+using Core;
+using Core.Dtos;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

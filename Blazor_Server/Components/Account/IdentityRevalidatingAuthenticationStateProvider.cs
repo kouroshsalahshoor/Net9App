@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using Domain;
+using Core;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;

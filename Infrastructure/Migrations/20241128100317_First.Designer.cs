@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127120903_First")]
+    [Migration("20241128100317_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.ApplicationUser", b =>
+            modelBuilder.Entity("Core.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -90,7 +90,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.BethanysPieShopHR.Country", b =>
+            modelBuilder.Entity("Core.BethanysPieShopHR.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,7 +154,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.BethanysPieShopHR.Employee", b =>
+            modelBuilder.Entity("Core.BethanysPieShopHR.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -257,7 +257,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.BethanysPieShopHR.JobCategory", b =>
+            modelBuilder.Entity("Core.BethanysPieShopHR.JobCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,7 +321,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Category", b =>
+            modelBuilder.Entity("Core.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -341,7 +341,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Domain.Product", b =>
+            modelBuilder.Entity("Core.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -371,7 +371,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Domain.ProductPrice", b =>
+            modelBuilder.Entity("Core.ProductPrice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -529,15 +529,15 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.BethanysPieShopHR.Employee", b =>
+            modelBuilder.Entity("Core.BethanysPieShopHR.Employee", b =>
                 {
-                    b.HasOne("Domain.BethanysPieShopHR.Country", "Country")
+                    b.HasOne("Core.BethanysPieShopHR.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.BethanysPieShopHR.JobCategory", "JobCategory")
+                    b.HasOne("Core.BethanysPieShopHR.JobCategory", "JobCategory")
                         .WithMany()
                         .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -548,9 +548,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("JobCategory");
                 });
 
-            modelBuilder.Entity("Domain.Product", b =>
+            modelBuilder.Entity("Core.Product", b =>
                 {
-                    b.HasOne("Domain.Category", "Category")
+                    b.HasOne("Core.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -559,9 +559,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.ProductPrice", b =>
+            modelBuilder.Entity("Core.ProductPrice", b =>
                 {
-                    b.HasOne("Domain.Product", "Product")
+                    b.HasOne("Core.Product", "Product")
                         .WithMany("ProductPrices")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,7 +581,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Domain.ApplicationUser", null)
+                    b.HasOne("Core.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -590,7 +590,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Domain.ApplicationUser", null)
+                    b.HasOne("Core.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -605,7 +605,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.ApplicationUser", null)
+                    b.HasOne("Core.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -614,14 +614,14 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Domain.ApplicationUser", null)
+                    b.HasOne("Core.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Product", b =>
+            modelBuilder.Entity("Core.Product", b =>
                 {
                     b.Navigation("ProductPrices");
                 });

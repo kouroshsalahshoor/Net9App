@@ -1,4 +1,4 @@
-﻿using Domain.Dtos;
+﻿using Core.Dtos;
 
 namespace Blazor_Wasm.Service.IService
 {

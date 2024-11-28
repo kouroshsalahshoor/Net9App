@@ -1,4 +1,4 @@
-﻿using Domain.Dtos;
+﻿using Core.Dtos;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿namespace Domain.Dtos.API;
+﻿namespace Core.Dtos.API;
 
 public class ResponseDto
 {

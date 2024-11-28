@@ -1,5 +1,5 @@
-﻿using Domain;
-using Domain.BethanysPieShopHR;
+﻿using Core;
+using Core.BethanysPieShopHR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -3,7 +3,7 @@ using Blazor_Server.Components;
 using Blazor_Server.Components.Account;
 using Blazor_Server.Service;
 using Blazor_Server.Service.IService;
-using Domain;
+using Core;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;

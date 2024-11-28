@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.BethanysPieShopHR;
+namespace Core.BethanysPieShopHR;
 
 public class Employee
 {

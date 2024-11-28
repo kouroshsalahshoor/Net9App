@@ -1,5 +1,5 @@
 ﻿using Application.Repository.IRepository;
-using Domain.BethanysPieShopHR;
+using Core.BethanysPieShopHR;
 using Infrastructure.Data;
 
 namespace Application.Repository;

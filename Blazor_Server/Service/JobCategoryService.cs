@@ -1,5 +1,5 @@
 ﻿using Blazor_Server.Service.IService;
-using Domain.BethanysPieShopHR;
+using Core.BethanysPieShopHR;
 using System.Text.Json;
 
 namespace Blazor_Server.Service;

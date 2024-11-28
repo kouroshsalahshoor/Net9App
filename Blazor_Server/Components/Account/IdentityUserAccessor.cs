@@ -1,4 +1,4 @@
-using Domain;
+using Core;
 using Microsoft.AspNetCore.Identity;
 
 namespace Blazor_Server.Components.Account

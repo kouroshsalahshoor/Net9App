@@ -1,4 +1,4 @@
-﻿namespace Domain.BethanysPieShopHR;
+﻿namespace Core.BethanysPieShopHR;
 
 public enum Gender
 {

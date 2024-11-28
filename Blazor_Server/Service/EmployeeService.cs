@@ -1,4 +1,4 @@
-﻿using Domain.BethanysPieShopHR;
+﻿using Core.BethanysPieShopHR;
 using System.Text.Json;
 using System.Text;
 using Blazor_Server.Service.IService;

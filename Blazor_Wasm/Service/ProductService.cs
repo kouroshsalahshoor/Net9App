@@ -1,6 +1,6 @@
 ﻿using Blazor_Wasm.Service.IService;
-using Domain.Dtos;
-using Domain.Dtos.API;
+using Core.Dtos;
+using Core.Dtos.API;
 using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
 

@@ -1,4 +1,4 @@
-﻿using Domain.BethanysPieShopHR;
+﻿using Core.BethanysPieShopHR;
 
 namespace Application.Repository.IRepository;
 

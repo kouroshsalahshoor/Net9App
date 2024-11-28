@@ -1,5 +1,5 @@
 ﻿using Application.Repository;
-using Domain.Dtos.API;
+using Core.Dtos.API;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
