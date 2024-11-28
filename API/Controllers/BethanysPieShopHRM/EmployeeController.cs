@@ -16,19 +16,19 @@ public class EmployeeController : Controller
     }
 
     [HttpGet]
-    public IActionResult GetAllEmployees()
+    public async Task<IActionResult> GetAllEmployees()
     {
-        return Ok(_repository.Get());
+        return Ok(await _repository.Get());
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetEmployeeById(int id)
+    public async Task<IActionResult> GetEmployeeById(int id)
     {
-        return Ok(_repository.Get(id));
+        return Ok(await _repository.Get(id));
     }
 
     [HttpPost]
-    public IActionResult CreateEmployee([FromBody] Employee employee)
+    public async Task<IActionResult> CreateEmployee([FromBody] Employee employee)
     {
         if (employee == null)
             return BadRequest();
@@ -41,13 +41,13 @@ public class EmployeeController : Controller
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var createdEmployee = _repository.Add(employee);
+        var createdEmployee = await _repository.Add(employee);
 
         return Created("employee", createdEmployee);
     }
 
     [HttpPut]
-    public IActionResult UpdateEmployee([FromBody] Employee employee)
+    public async Task<IActionResult> UpdateEmployee([FromBody] Employee employee)
     {
         if (employee == null)
             return BadRequest();
@@ -60,27 +60,27 @@ public class EmployeeController : Controller
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var employeeToUpdate = _repository.Get(employee.Id);
+        var employeeToUpdate = await _repository.Get(employee.Id);
 
         if (employeeToUpdate == null)
             return NotFound();
 
-        _repository.Update(employee);
+        await _repository.Update(employee);
 
         return NoContent(); //success
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteEmployee(int id)
+    public async Task<IActionResult> DeleteEmployee(int id)
     {
         if (id == 0)
             return BadRequest();
 
-        var employeeToDelete = _repository.Get(id);
+        var employeeToDelete = await _repository.Get(id);
         if (employeeToDelete == null)
             return NotFound();
 
-        _repository.Delete(id);
+        await _repository.Delete(id);
 
         return NoContent();//success
     }

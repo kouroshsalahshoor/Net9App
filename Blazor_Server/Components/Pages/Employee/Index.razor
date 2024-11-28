@@ -46,11 +46,11 @@ else
 
 @code {
     [Inject]
-    public IEmployeeService _employeeService { get; set; }
+    public IEmployeeService _employeeService { get; set; } = default!;
 
-    public List<Employee> Employees { get; set; }
+    public List<Employee> Employees { get; set; } = default!;
 
-    protected _AddModal _addModal { get; set; }
+    protected _AddModal _addModal { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {

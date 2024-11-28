@@ -4,6 +4,6 @@ namespace Application.Repository.IRepository;
 
 public interface ICountryRepository
 {
-    IEnumerable<Country> Get();
-    Country? Get(int id);
+    Task<IEnumerable<Country>> Get();
+    Task<Country?> Get(int id);
 }

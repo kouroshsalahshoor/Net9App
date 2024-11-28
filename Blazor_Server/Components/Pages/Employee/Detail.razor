@@ -10,11 +10,11 @@
 
 
     <div class="col-12 row">
-        <div class="col-2">
+        <div class="col-md-2">
             <img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{_model.Id}.jpg")" class="img-responsive rounded-circle employee-detail-img" />
         </div>
-        <div class="col-10 row">
-            <div class="col-xs-12 col-sm-8">
+        <div class="col-md-10 row">
+            <div class="col-md-6">
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Employee ID</label>
                     <div class="col-sm-8">
@@ -122,9 +122,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-4">
-                <div class="track-order-map">
-                    <Map Zoom="10" Markers="_mapMarkers"></Map>
+            <div class="col-md-6">
+                <div class="track-order-map" style="width:100%;height:100%;">
+                    <_Map Zoom="10" Markers="_mapMarkers"></_Map>
                 </div>
             </div>
         </div>
@@ -135,14 +135,14 @@
 
 @code {
     [Inject]
-    public IEmployeeService _employeeService { get; set; }
+    public IEmployeeService _employeeService { get; set; } = default!;
 
     [Inject]
-    public IJobCategoryService _jobCategoryService { get; set; }
+    public IJobCategoryService _jobCategoryService { get; set; } = default!;
 
 
     [Parameter]
-    public string Id { get; set; }
+    public string Id { get; set; } = default!;
 
 
     private List<Marker> _mapMarkers { get; set; } = new List<Marker>();

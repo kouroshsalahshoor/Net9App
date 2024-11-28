@@ -1,6 +1,7 @@
 ﻿using Application.Repository.IRepository;
 using Core.BethanysPieShopHR;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Repository;
 
@@ -13,13 +14,13 @@ public class CountryRepository : ICountryRepository
         _db = db;
     }
 
-    public IEnumerable<Country> Get()
+    public async Task<IEnumerable<Country>> Get()
     {
-        return _db.Countries;
+        return await _db.Countries.ToListAsync();
     }
 
-    public Country? Get(int id)
+    public async Task<Country?> Get(int id)
     {
-        return _db.Countries.FirstOrDefault(c => c.Id == id);
+        return await _db.Countries.FirstOrDefaultAsync(c => c.Id == id);
     }
 }

@@ -17,15 +17,15 @@ public class JobCategoryController : Controller
 
     // GET: api/<controller>
     [HttpGet]
-    public IActionResult GetJobCategories()
+    public async Task<IActionResult> GetJobCategories()
     {
-        return Ok(_repository.Get());
+        return Ok(await _repository.Get());
     }
 
     // GET api/<controller>/5
     [HttpGet("{id}")]
-    public IActionResult GetJobCategoryById(int id)
+    public async Task<IActionResult> GetJobCategoryById(int id)
     {
-        return Ok(_repository.Get(id));
+        return Ok(await _repository.Get(id));
     }
 }

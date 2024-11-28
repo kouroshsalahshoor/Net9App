@@ -16,15 +16,15 @@ public class CountryController : Controller
 
     // GET: api/<controller>
     [HttpGet]
-    public IActionResult GetCountries()
+    public async Task<IActionResult> GetCountries()
     {
-        return Ok(_repository.Get());
+        return Ok(await _repository.Get());
     }
 
     // GET api/<controller>/5
     [HttpGet("{id}")]
-    public IActionResult GetCountryById(int id)
+    public async Task<IActionResult> GetCountryById(int id)
     {
-        return Ok(_repository.Get(id));
+        return Ok(await _repository.Get(id));
     }
 }

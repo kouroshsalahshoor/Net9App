@@ -1,4 +1,5 @@
 ﻿<div id="@elementId" style="height: 100%; width: 100%;"></div>
+@* <div id="@elementId" style="height: 1000px; width: 300px;"></div> *@
 
 @code {
 
@@ -8,7 +9,7 @@
     public double Zoom { get; set; }
 
     [Parameter]
-    public List<Marker> Markers { get; set; }
+    public List<Marker> Markers { get; set; } = default!;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
