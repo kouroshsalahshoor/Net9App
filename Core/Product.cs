@@ -1,6 +1,8 @@
-﻿namespace Core;
+﻿using Core.Common;
 
-public class Product
+namespace Core;
+
+public class Product : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

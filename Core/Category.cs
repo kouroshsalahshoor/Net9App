@@ -1,6 +1,8 @@
-﻿namespace Core;
+﻿using Core.Common;
 
-public class Category
+namespace Core;
+
+public class Category : AuditableEntity
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
