@@ -16,7 +16,7 @@
 
 <QuickGrid Class="table" Items="context.Categories">
     <PropertyColumn Property="category => category.Name" />
-    <PropertyColumn Property="category => category.CreatedDate" />
+    @* <PropertyColumn Property="category => category.CreatedDate" /> *@
 
     <TemplateColumn Context="category">
         <a href="@($"xcategories/edit?id={category.Id}")">Edit</a> |

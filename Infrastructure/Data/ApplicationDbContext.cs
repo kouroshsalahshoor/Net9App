@@ -2,6 +2,7 @@
 using Core.BethanysPieShopHR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static System.Net.WebRequestMethods;
 
 namespace Infrastructure.Data;
 
@@ -21,41 +22,79 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     {
         base.OnModelCreating(modelBuilder);
 
-        //var createdOn = DateTime.Now;
-        //int i = 1;
-        //var categories = new List<Category>()
-        //{
-        //    new Category{ Id = i++, Name = "Pasta", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Ris", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Olja", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Konserver", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Konserver", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Färdigmat", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Kryddor", CreatedDate = createdOn},
+        var createdOn = DateTime.Now;
+        int i = 1;
+        var categories = new List<Category>()
+        {
+            //https://www.matsmart.se/alla-produkter
+            // https://www.mathem.se/se/products/
 
-        //    new Category{ Id = i++, Name = "Ägg", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Kaffe", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Ost", CreatedDate = createdOn},
-        //    new Category{ Id = i++,Name = "Pasta", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Krossade Tomater", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Olja", CreatedDate = createdOn},
-        //    new Category{ Id = i++,Name = "Ketchup", CreatedDate = createdOn},
-        //    new Category{ Id = i++,Name = "Saffran", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Hund- & kattmat", CreatedDate = createdOn},
+            new Category{ Id = i++, Name = "Mejeri"},
+            new Category{ Id = i++, Name = "Pasta"},
+            new Category{ Id = i++, Name = "Spagetti"},
+            new Category{ Id = i++, Name = "Ris"},
+            new Category{ Id = i++, Name = "Matgryn"},
+            new Category{ Id = i++, Name = "Konserver"},
+            new Category{ Id = i++, Name = "Kryddor"},
+            new Category{ Id = i++, Name = "Oljor"},
+            new Category{ Id = i++, Name = "Såser"},
+            new Category{ Id = i++, Name = "Kaffe"},
+            new Category{ Id = i++, Name = "Te"},
+            new Category{ Id = i++, Name = "Flingor"},
+            new Category{ Id = i++, Name = "Gryn"},
+            new Category{ Id = i++, Name = "Musli"},
+            new Category{ Id = i++, Name = "Sylt"},
+            new Category{ Id = i++, Name = "Marmelad"},
+            new Category{ Id = i++, Name = "Mjöl"},
+            new Category{ Id = i++, Name = "Bakelser"},
+            new Category{ Id = i++, Name = "Dessert"},
+            new Category{ Id = i++, Name = "Övrig Skafferi"},
             
-        //    new Category{ Id = i++, Name = "Kött", CreatedDate = createdOn},
-        //    new Category{ Id = i++,Name = "Grönsaker", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Mejerivaror", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Spannmål", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Frukt & bär", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Potatis & rotfrukter", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Fågel", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Honung & socker", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Fisk & skaldjur", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Svamp", CreatedDate = createdOn},
-        //    new Category{ Id = i++, Name = "Blommor & växter", CreatedDate = createdOn},
-        //};
-        //modelBuilder.Entity<Category>().HasData(categories);
+            new Category{ Id = i++, Name = "Färdigmat"},
+
+            new Category{ Id = i++, Name = "Spannmål"},
+            new Category{ Id = i++, Name = "Honung & Söcker"},
+            
+            new Category{ Id = i++, Name = "Bröd"},
+            new Category{ Id = i++, Name = "Bageri"},
+
+            new Category{ Id = i++, Name = "Glass"},
+            new Category{ Id = i++, Name = "Godis"},
+            new Category{ Id = i++, Name = "Chocklad"},
+            new Category{ Id = i++, Name = "Chips"},
+            new Category{ Id = i++, Name = "Nötter"},
+            new Category{ Id = i++, Name = "Torkade frukt"},
+            new Category{ Id = i++, Name = "Fröer"},
+            new Category{ Id = i++, Name = "Tuggummi"},
+            new Category{ Id = i++, Name = "Lakris"},
+            new Category{ Id = i++, Name = "övrig Godis & snack"},
+
+            new Category{ Id = i++, Name = "Rotfrukter"},
+            new Category{ Id = i++,Name = "Grönsaker"},
+            new Category{ Id = i++, Name = "Frukt & bär"},
+            //new Category{ Id = i++, Name = "Svamp"},
+
+            new Category{ Id = i++, Name = "Nöt Kött"},
+            new Category{ Id = i++, Name = "Gris Kött"},
+            new Category{ Id = i++, Name = "Fågel"},
+            new Category{ Id = i++, Name = "Fisk & skaldjur"},
+
+            new Category{ Id = i++, Name = "Läsk"},
+            new Category{ Id = i++, Name = "Vatten"},
+            new Category{ Id = i++, Name = "Juice"},
+            new Category{ Id = i++, Name = "Smoothie"},
+            new Category{ Id = i++, Name = "Saft"},
+            new Category{ Id = i++, Name = "Energ & Sport Dryck"},
+            new Category{ Id = i++, Name = "Växtbaserade Dryck"},
+            new Category{ Id = i++, Name = "Övrig Dryck"},
+
+            new Category{ Id = i++, Name = "Hem & Hushåll"},
+
+            new Category{ Id = i++, Name = "Hund & katt"},
+
+            new Category{ Id = i++, Name = "Blommor & växter"},
+        };
+        modelBuilder.Entity<Category>().HasData(categories);
 
         #region BethanysPieShopHRM
         modelBuilder.Entity<Country>().HasData(new Country { Id = 1, Name = "Belgium" });

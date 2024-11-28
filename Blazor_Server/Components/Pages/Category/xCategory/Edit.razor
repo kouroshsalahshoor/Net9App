@@ -27,11 +27,11 @@ else
                     <InputText id="name" @bind-Value="Category.Name" class="form-control" />
                     <ValidationMessage For="() => Category.Name" class="text-danger" />
                 </div>
-                <div class="mb-3">
+                @* <div class="mb-3">
                     <label for="createddate" class="form-label">CreatedDate:</label>
                     <InputDate id="createddate" @bind-Value="Category.CreatedDate" class="form-control" />
                     <ValidationMessage For="() => Category.CreatedDate" class="text-danger" />
-                </div>
+                </div> *@
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
