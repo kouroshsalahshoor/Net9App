@@ -2,6 +2,7 @@
 @page "/category/update/{id:int}"
 
 @attribute [StreamRendering]
+@attribute [Authorize]
 
 <PageTitle>@_title Category</PageTitle>
 
@@ -19,6 +20,7 @@
             <EditForm method="post" Model="_dto" OnValidSubmit="save" FormName="createUpdate" Enhance>
                 <DataAnnotationsValidator />
                 <ValidationSummary class="text-danger" role="alert" />
+                <AntiforgeryToken />
 
                 <_Error Message="@_errorMessage" />
 
