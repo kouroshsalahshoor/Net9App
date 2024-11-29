@@ -30,3 +30,11 @@
 
 ### Architecture
 * [Pluralsight – ASP.NET Core 6 Clean Architecture 2022-12](https://downloadlynet.ir/2023/18/93765/03/asp-net-core-6-clean-architecture/21/?#/93765-pluralsi-022450112828.html)
+
+### Authors
+* adam freeman
+* Bhrugen Patel
+* gill cleeren
+* kevin dockx
+* Felipe Gavilán
+* Ervis Trupja
