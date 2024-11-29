@@ -7,6 +7,11 @@
 * EntityFrameworkCore\Update-Database
 
 ---
+# bunit
+## install
+in solution folder:
+> dotnet new install bunit.template
+---
 
 ## Project Architecture (Clean)
 * Models => Domain
