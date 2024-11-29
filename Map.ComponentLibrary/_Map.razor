@@ -1,4 +1,6 @@
-﻿<div id="@elementId" style="height: 100%; width: 100%;"></div>
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime _jSRuntime
+<div id="@elementId" style="height: 100%; width: 100%;"></div>
 @* <div id="@elementId" style="height: 1000px; width: 300px;"></div> *@
 
 @code {

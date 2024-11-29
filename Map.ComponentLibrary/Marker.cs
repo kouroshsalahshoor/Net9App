@@ -1,4 +1,4 @@
-﻿namespace Blazor_Server.Components.Map;
+﻿namespace Map.ComponentLibrary;
 
 public class Marker
 {
