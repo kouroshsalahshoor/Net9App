@@ -37,9 +37,9 @@ in solution folder:
 * [Pluralsight – ASP.NET Core 6 Clean Architecture 2022-12](https://downloadlynet.ir/2023/18/93765/03/asp-net-core-6-clean-architecture/21/?#/93765-pluralsi-022450112828.html)
 
 ### Authors
-* adam freeman
-* Bhrugen Patel
-* gill cleeren
-* kevin dockx
-* Felipe Gavilán
-* Ervis Trupja
+* [adam freeman](https://www.ebooksworld.ir/search?term=adam+freeman)
+* [Bhrugen Patel](https://downloadlynet.ir/?s=Bhrugen+Patel)
+* [gill cleeren](https://downloadlynet.ir/?s=gill+cleeren&post_type%5B%5D=post&post_type%5B%5D=download)
+* [kevin dockx](https://downloadlynet.ir/?s=kevin+dockx&post_type%5B%5D=post&post_type%5B%5D=download)
+* [Felipe Gavilán](https://downloadlynet.ir/?s=Felipe+Gavil%C3%A1n&post_type%5B%5D=post&post_type%5B%5D=download)
+* [Ervis Trupja](https://downloadlynet.ir/?s=Ervis+Trupja&post_type%5B%5D=post&post_type%5B%5D=download)
