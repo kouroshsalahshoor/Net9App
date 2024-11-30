@@ -7,6 +7,22 @@
 * EntityFrameworkCore\Update-Database
 
 ---
+## Subjects:
+- [x] Blazor
+- [x] Clean Architecture
+- [ ] Test
+- [ ] identity
+- [ ] Design Patterns
+- [ ] Reflection
+- [ ] Long-Running Tasks
+- [ ] azure
+- [ ] ci cd
+- [ ] docker
+- [ ] Kubernetes
+- [ ] React
+- [ ] Angular
+- [ ] Vue
+---
 # bunit
 ## install
 in solution folder:
