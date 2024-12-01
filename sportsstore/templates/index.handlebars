@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            {{> category_controls }}
+        </div>
+        <div class="col">
+
+            {{> search_controls }}
+
+            {{#unless products}}<h4>No products</h4>{{/unless}}
+            {{#each products }}
+            {{> product this }}
+            {{/each}}
+
+            <!--<table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Supplier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products }}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{description}}</td>
+                        <td>{{price}}</td>
+                        <td>{{category.name}}</td>
+                        <td>{{supplier.name}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>-->
+
+            {{> page_controls }}
+
+            <!--<div class="h4 m-2">Hello, SportsStore</div>-->
+
+        </div>
+    </div>
+</div>

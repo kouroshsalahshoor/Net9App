@@ -57,6 +57,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MultiThreadingDemos", "Mult
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireDemo1", "HangfireDemo1\HangfireDemo1.csproj", "{0C289E60-0A51-4109-8884-ADD3C7C10DEE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NodeJs", "NodeJs", "{3E97884D-DDBB-4D2E-83BD-93D99D4A331C}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sportsstore", "sportsstore\", "{DCF05B5E-9620-4008-97B6-DA4F10191BB5}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/localhost_49948"
+		Debug.AspNetCompiler.PhysicalPath = "sportsstore\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49948\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_49948"
+		Release.AspNetCompiler.PhysicalPath = "sportsstore\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49948\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49948"
+		SlnRelativePath = "sportsstore\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +157,10 @@ Global
 		{0C289E60-0A51-4109-8884-ADD3C7C10DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C289E60-0A51-4109-8884-ADD3C7C10DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C289E60-0A51-4109-8884-ADD3C7C10DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,5 +191,7 @@ Global
 		{8F015DC1-EF90-48AC-8574-904057F236E8} = {D6FA6F18-319C-4255-AD31-61E64F7D35DC}
 		{D6FA6F18-319C-4255-AD31-61E64F7D35DC} = {BFE362BD-B5B7-40C3-8BFD-100B7E0DF522}
 		{0C289E60-0A51-4109-8884-ADD3C7C10DEE} = {8F015DC1-EF90-48AC-8574-904057F236E8}
+		{3E97884D-DDBB-4D2E-83BD-93D99D4A331C} = {61A85204-738E-425E-901B-2608065AA5DA}
+		{DCF05B5E-9620-4008-97B6-DA4F10191BB5} = {3E97884D-DDBB-4D2E-83BD-93D99D4A331C}
 	EndGlobalSection
 EndGlobal
