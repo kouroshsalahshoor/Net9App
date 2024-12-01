@@ -11,14 +11,21 @@
 - [x] Blazor
 - [x] Clean Architecture
 - [ ] Test
+- [x] XUnit
+- [x] BUnit
+- [x] Selenium
 - [ ] identity
 - [ ] Design Patterns
 - [ ] Reflection
-- [ ] Long-Running Tasks
+- [x] Long-Running Tasks
+- [x] Hangfire
 - [ ] azure
 - [ ] ci cd
 - [ ] docker
-- [ ] Kubernetes
+- [x] Kubernetes
+- [x] kind
+- [x] Typescript
+- [x] Node
 - [ ] React
 - [ ] Angular
 - [ ] Vue
@@ -37,6 +44,50 @@ in solution folder:
 * Common (Dtos) => Shared
 
 ![Architecture](/images/clean_architecture.png)
+---
+## Kubernetes
+https://kind.sigs.k8s.io/docs/user/quick-start#installing-from-release-binaries
+
+> C:\kind>kind
+> C:\kind>kind create cluster --name k8s-course
+
+> kubectl get nodes
+> kubectl get pods --all-namespaces
+> kubectl get services --all-namespaces
+> kubectl get services --namespace kube-system
+> kubectl get deployments --all-namespaces
+> kubectl get namespaces
+
+> kubectl create ns my-namespace
+> kubectl create deployment my-website --image=nginx --port=80 --replicas=3 --namespace my-namespace
+> kubectl expose deployment my-website --port=80 -n my-namespace
+
+Wait for the deployment to be ready
+> kubectl rollout status deployment/my-website
+
+Port forward to the service so we can access from our host
+(there are other ways - but we'll cover that later in this course)
+> kubectl port-forward service/my-website 8080:80 -n my-namespace
+
+If you want to cleanup, run this command after you're done...
+> kubectl delete ns my-namespace
+
+C:\Users\kouro\.kube\config
+
+List all contexts
+> kubectl config get-contexts
+
+Switch context
+> kubectl config use-context my-context
+
+Check current context
+> kubectl config current-context
+
+> Create new context
+kubectl config set-context my-context --cluster=<cluster-name> --user=<user-name> --namespace=<namespace>
+
+Set namespace for current context
+> kubectl config set-context --current --namespace=my-namespace
 
 ---
 
@@ -51,6 +102,9 @@ in solution folder:
 
 ### Architecture
 * [Pluralsight – ASP.NET Core 6 Clean Architecture 2022-12](https://downloadlynet.ir/2023/18/93765/03/asp-net-core-6-clean-architecture/21/?#/93765-pluralsi-022450112828.html)
+
+### Kubernetes
+[Dometrain – From Zero to Hero: Kubernetes for Developers 2024-6](https://downloadlynet.ir/2024/24/132804/07/from-zero-to-hero-kubernetes-for-developers/13/?#/132804-dometrai-112449122301.html)
 
 ### Authors
 * [adam freeman](https://www.ebooksworld.ir/search?term=adam+freeman)
