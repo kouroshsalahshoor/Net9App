@@ -61,6 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NodeJs", "NodeJs", "{3E9788
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sportsstore", "sportsstore\", "{DCF05B5E-9620-4008-97B6-DA4F10191BB5}"
 	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_49948"
 		Debug.AspNetCompiler.PhysicalPath = "sportsstore\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49948\"
@@ -78,6 +79,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sportsstore", "sportsstore\
 		VWDPort = "49948"
 		SlnRelativePath = "sportsstore\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApi", "MinimalApi\MinimalApi.csproj", "{38D71006-223F-4280-AB5A-06CC843BAC16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +164,10 @@ Global
 		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCF05B5E-9620-4008-97B6-DA4F10191BB5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{38D71006-223F-4280-AB5A-06CC843BAC16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D71006-223F-4280-AB5A-06CC843BAC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D71006-223F-4280-AB5A-06CC843BAC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D71006-223F-4280-AB5A-06CC843BAC16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,5 +200,6 @@ Global
 		{0C289E60-0A51-4109-8884-ADD3C7C10DEE} = {8F015DC1-EF90-48AC-8574-904057F236E8}
 		{3E97884D-DDBB-4D2E-83BD-93D99D4A331C} = {61A85204-738E-425E-901B-2608065AA5DA}
 		{DCF05B5E-9620-4008-97B6-DA4F10191BB5} = {3E97884D-DDBB-4D2E-83BD-93D99D4A331C}
+		{38D71006-223F-4280-AB5A-06CC843BAC16} = {61A85204-738E-425E-901B-2608065AA5DA}
 	EndGlobalSection
 EndGlobal
