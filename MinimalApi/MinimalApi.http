@@ -1,5 +1,8 @@
 @MinimalApi_HostAddress = http://localhost:5086
 
+Delete {{MinimalApi_HostAddress}}/categories/54
+Accept: application/json
+###
 Put {{MinimalApi_HostAddress}}/categories
 Content-Type: application/json
 
