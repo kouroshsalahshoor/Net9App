@@ -71,7 +71,7 @@ public class CategoryRepository : ICategoryRepository
         return _mapper.Map<IEnumerable<CategoryDto>>(_db.Categories);
     }
 
-    public async Task<CategoryDto> Update(CategoryDto dto)
+    public async Task<CategoryDto?> Update(CategoryDto dto)
     {
         var model = await _db.Categories.FirstOrDefaultAsync(x => x.Id == dto.Id);
         if (model is not null)
@@ -86,6 +86,6 @@ public class CategoryRepository : ICategoryRepository
 
             return _mapper.Map<CategoryDto>(model);
         }
-        return new CategoryDto();
+        return null;
     }
 }

@@ -1,5 +1,13 @@
 @MinimalApi_HostAddress = http://localhost:5086
 
+Put {{MinimalApi_HostAddress}}/categories
+Content-Type: application/json
+
+{
+    "id": 54,
+    "name": "xxx"
+}
+###
 Post {{MinimalApi_HostAddress}}/categories
 Content-Type: application/json
 

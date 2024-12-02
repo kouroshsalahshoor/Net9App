@@ -82,7 +82,16 @@ categoriesGroup.MapGet("/{id}", async (ICategoryRepository repository, int id) =
 categoriesGroup.MapPost("/", async (ICategoryRepository repository, CategoryDto dto) =>
 {
     dto = await repository.Create(dto);
-    return Results.CreatedAtRoute("GetCategory", new {id=dto.Id}, dto);
+    return Results.CreatedAtRoute("GetCategory", new { id = dto.Id }, dto);
+});
+categoriesGroup.MapPut("/", async (ICategoryRepository repository, CategoryDto dto) =>
+{
+    var result = await repository.Update(dto);
+    if (result is null)
+    {
+        return Results.NotFound();
+    }
+    return Results.NoContent();
 });
 
 app.MapGet("/genres", [EnableCors("free")] () =>
