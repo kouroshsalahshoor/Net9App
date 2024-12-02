@@ -1,4 +1,8 @@
+using Application.Repository;
+using Core.Dtos;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.EntityFrameworkCore;
 using MinimalApi.models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +34,13 @@ builder.Services.AddOutputCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 #endregion
 
 var app = builder.Build();
@@ -51,6 +62,29 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapGet("/", () => name).CacheOutput();
+
+var categoriesGroup = app.MapGroup("/categories");
+categoriesGroup.MapGet("/", async (ICategoryRepository repository) =>
+{
+    return Results.Ok(await repository.Get());
+});
+categoriesGroup.MapGet("/{id}", async (ICategoryRepository repository, int id) =>
+{
+    var model = await repository.Get(id);
+
+    if (model is null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(model);
+})
+    .WithName("GetCategory");
+categoriesGroup.MapPost("/", async (ICategoryRepository repository, CategoryDto dto) =>
+{
+    dto = await repository.Create(dto);
+    return Results.CreatedAtRoute("GetCategory", new {id=dto.Id}, dto);
+});
+
 app.MapGet("/genres", [EnableCors("free")] () =>
 {
     var models = new List<Genre>();
@@ -60,7 +94,8 @@ app.MapGet("/genres", [EnableCors("free")] () =>
         models.Add(new Genre() { Id = i, Name = "Genre " + i.ToString() });
     }
     return models;
-}).CacheOutput(x=>x.Expire(TimeSpan.FromSeconds(10)));
+})
+    .CacheOutput(x => x.Expire(TimeSpan.FromSeconds(10)));
 
 #endregion
 
