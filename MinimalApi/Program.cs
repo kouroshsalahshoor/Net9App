@@ -25,6 +25,8 @@ builder.Services.AddCors(options =>
 
 var name = builder.Configuration.GetValue<string>("name");
 
+builder.Services.AddOutputCache();
+
 #endregion
 
 var app = builder.Build();
@@ -39,8 +41,9 @@ app.UseHttpsRedirection();
 
 #region middleware
 app.UseCors("free");
+app.UseOutputCache();
 
-app.MapGet("/", () => name);
+app.MapGet("/", () => name).CacheOutput();
 app.MapGet("/genres", [EnableCors("free")] () =>
 {
     var models = new List<Genre>();
@@ -50,7 +53,7 @@ app.MapGet("/genres", [EnableCors("free")] () =>
         models.Add(new Genre() { Id = i, Name = "Genre " + i.ToString() });
     }
     return models;
-});
+}).CacheOutput(x=>x.Expire(TimeSpan.FromSeconds(10)));
 
 #endregion
 
