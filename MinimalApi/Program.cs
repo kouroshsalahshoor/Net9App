@@ -9,6 +9,8 @@ builder.Services.AddOpenApi();
 
 #region services
 
+var name = builder.Configuration.GetValue<string>("name");
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(config =>
@@ -23,9 +25,10 @@ builder.Services.AddCors(options =>
 
 });
 
-var name = builder.Configuration.GetValue<string>("name");
-
 builder.Services.AddOutputCache();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 #endregion
 
@@ -41,7 +44,11 @@ app.UseHttpsRedirection();
 
 #region middleware
 app.UseCors("free");
+
 app.UseOutputCache();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapGet("/", () => name).CacheOutput();
 app.MapGet("/genres", [EnableCors("free")] () =>
