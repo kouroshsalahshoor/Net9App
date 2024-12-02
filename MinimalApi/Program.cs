@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Cors;
 using MinimalApi.models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
 #region services
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(config =>
+    {
+        //config.WithOrigins(builder.Configuration["allowedOrigins]!)
+        config.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+
+    options.AddPolicy("free", config => { config.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+
+});
 
 var name = builder.Configuration.GetValue<string>("name");
 
@@ -23,9 +38,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 #region middleware
+app.UseCors("free");
 
 app.MapGet("/", () => name);
-app.MapGet("/genres", () =>
+app.MapGet("/genres", [EnableCors("free")] () =>
 {
     var models = new List<Genre>();
 
@@ -38,28 +54,4 @@ app.MapGet("/genres", () =>
 
 #endregion
 
-//var summaries = new[]
-//{
-//    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-//};
-
-//app.MapGet("/weatherforecast", () =>
-//{
-//    var forecast = Enumerable.Range(1, 5).Select(index =>
-//        new WeatherForecast
-//        (
-//            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-//            Random.Shared.Next(-20, 55),
-//            summaries[Random.Shared.Next(summaries.Length)]
-//        ))
-//        .ToArray();
-//    return forecast;
-//})
-//.WithName("GetWeatherForecast");
-
 app.Run();
-
-//internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-//{
-//    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-//}
