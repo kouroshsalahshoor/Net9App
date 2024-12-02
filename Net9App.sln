@@ -82,6 +82,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sportsstore", "sportsstore\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApi", "MinimalApi\MinimalApi.csproj", "{38D71006-223F-4280-AB5A-06CC843BAC16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiConsumer", "ApiClonsumer\ApiConsumer.csproj", "{D6EE7501-F900-41A4-BEF0-3B46510529BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +170,10 @@ Global
 		{38D71006-223F-4280-AB5A-06CC843BAC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38D71006-223F-4280-AB5A-06CC843BAC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38D71006-223F-4280-AB5A-06CC843BAC16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6EE7501-F900-41A4-BEF0-3B46510529BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6EE7501-F900-41A4-BEF0-3B46510529BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6EE7501-F900-41A4-BEF0-3B46510529BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6EE7501-F900-41A4-BEF0-3B46510529BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,5 +207,6 @@ Global
 		{3E97884D-DDBB-4D2E-83BD-93D99D4A331C} = {61A85204-738E-425E-901B-2608065AA5DA}
 		{DCF05B5E-9620-4008-97B6-DA4F10191BB5} = {3E97884D-DDBB-4D2E-83BD-93D99D4A331C}
 		{38D71006-223F-4280-AB5A-06CC843BAC16} = {61A85204-738E-425E-901B-2608065AA5DA}
+		{D6EE7501-F900-41A4-BEF0-3B46510529BC} = {BFE362BD-B5B7-40C3-8BFD-100B7E0DF522}
 	EndGlobalSection
 EndGlobal
