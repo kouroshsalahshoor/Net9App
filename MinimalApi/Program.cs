@@ -63,7 +63,9 @@ app.UseSwaggerUI();
 
 app.MapGet("/", () => name).CacheOutput();
 
-var categoriesGroup = app.MapGroup("/categories");
+var categoriesGroup = app
+    .MapGroup("/categories")
+    .WithParameterValidation();
 categoriesGroup.MapGet("/", async (ICategoryRepository repository) =>
 {
     return Results.Ok(await repository.Get());
