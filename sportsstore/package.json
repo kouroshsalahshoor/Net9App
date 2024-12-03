@@ -23,6 +23,7 @@
     "@types/express": "^4.17.20",
     "@types/express-session": "^1.17.10",
     "@types/node": "^20.6.1",
+    "@types/validator": "^13.11.5",
     "nodemon": "^3.0.3",
     "tsc-watch": "^6.0.4",
     "typescript": "^5.2.2"
@@ -39,6 +40,7 @@
     "handlebars": "^4.7.8",
     "helmet": "^7.1.0",
     "sequelize": "^6.35.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "validator": "^13.11.0"
   }
 }
