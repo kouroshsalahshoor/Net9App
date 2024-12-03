@@ -1,5 +1,16 @@
 # Net9App
 
+![Architecture](/images/clean_architecture.png)
+---
+
+## Project Architecture (Clean)
+* Models => Core = Domain
+* Business (Services - Use Cases) => Application
+* DataAccess => Infrastructure
+* UI => Presentation
+* Common (Dtos) => Shared
+---
+
 ## To Migrate
 * default project in Package Manager Console) => Infrastructure
 * Set as startup project => Blazor_Server
@@ -34,16 +45,7 @@
 ## install
 in solution folder:
 > dotnet new install bunit.template
----
 
-## Project Architecture (Clean)
-* Models => Domain
-* Business (Services - Use Cases) => Application
-* DataAccess => Infrastructure
-* UI => Presentation
-* Common (Dtos) => Shared
-
-![Architecture](/images/clean_architecture.png)
 ---
 ## Kubernetes
 https://kind.sigs.k8s.io/docs/user/quick-start#installing-from-release-binaries
