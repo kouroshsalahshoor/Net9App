@@ -23,8 +23,11 @@
 - [x] Clean Architecture
 - [x] Test
 - [x] XUnit
+- [x] AutoFixture
+- [x] Fluent Assertion
 - [x] BUnit
 - [x] Selenium
+- [x] Specflow
 - [ ] identity
 - [ ] Design Patterns
 - [ ] Reflection
