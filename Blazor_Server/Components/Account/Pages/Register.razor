@@ -14,6 +14,8 @@
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
 
+@inject RoleManager<IdentityRole> _roleManager
+
 <PageTitle>Register</PageTitle>
 
 <h1>Register</h1>
@@ -41,6 +43,15 @@
                 <label for="Input.ConfirmPassword">Confirm Password</label>
                 <ValidationMessage For="() => Input.ConfirmPassword" class="text-danger" />
             </div>
+
+            <div class="form-floating mb-3">
+                <InputSelect @bind-Value="Input.Role" id="Input.Role" class="form-select">
+                    <option value="@Constants.Role_User">@Constants.Role_User</option>
+                    <option value="@Constants.Role_Admin">@Constants.Role_Admin</option>
+                </InputSelect>
+                <ValidationMessage For="() => Input.Role" class="text-danger" />
+            </div>
+
             <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </EditForm>
     </div>
@@ -64,6 +75,16 @@
 
     private string? Message => identityErrors is null ? null : $"Error: {string.Join(", ", identityErrors.Select(error => error.Description))}";
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (await _roleManager.RoleExistsAsync(Constants.Role_Admin) == false)
+        {
+            await _roleManager.CreateAsync(new IdentityRole(Constants.Role_Admin));
+            await _roleManager.CreateAsync(new IdentityRole(Constants.Role_User));
+            Logger.LogInformation("Roles Created");
+        }
+    }
+
     public async Task RegisterUser(EditContext editContext)
     {
         var user = CreateUser();
@@ -80,6 +101,8 @@
         }
 
         Logger.LogInformation("User created a new account with password.");
+
+        await UserManager.AddToRoleAsync(user, Input.Role);
 
         var userId = await UserManager.GetUserIdAsync(user);
         var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
@@ -131,7 +154,7 @@
         public string Email { get; set; } = "";
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        // [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; } = "";
@@ -140,5 +163,8 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; } = "";
+
+        [Required]
+        public string Role { get; set; } = Constants.Role_User;
     }
 }

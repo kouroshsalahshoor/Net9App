@@ -33,7 +33,7 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 1;
     options.Password.RequireDigit=false;
     options.Password.RequiredUniqueChars=0;
-    options.Password.RequireLowercase = true;
+    options.Password.RequireLowercase = false;
     options.Password.RequireUppercase=false;
 
     options.User.RequireUniqueEmail=true;
