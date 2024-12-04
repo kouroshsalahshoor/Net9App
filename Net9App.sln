@@ -77,7 +77,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sportsstore", "sportsstore\
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "49948"
-		SlnRelativePath = "sportsstore\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApi", "MinimalApi\MinimalApi.csproj", "{38D71006-223F-4280-AB5A-06CC843BAC16}"
