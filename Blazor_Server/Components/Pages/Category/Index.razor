@@ -3,6 +3,13 @@
 
 <PageTitle>@_title</PageTitle>
 
+<style>
+    th {
+        position: sticky;
+        top: 0;
+    }
+</style>
+
 <h1>@_title</h1>
 <hr />
 
@@ -22,32 +29,42 @@
 }
 else
 {
-    <table class="table table-hover table-sm table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>
-                    <a class="btn btn-primary btn-sm" href="category/create" title="Create"><i class="bi bi-plus-square"></i></a>
-                    <button class="btn btn-outline-primary btn-sm" @onclick="async () => await _createUpdateModal.Show(0)" title="Create Modal"><i class="bi bi-plus-square"></i></button>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in _filteredItems ?? _items)
-            {
+    <div style="overflow:scroll; height:100vh;">
+        <table class="table table-hover table-sm table-striped">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td class="fit">
-                        <a class="btn btn-warning btn-sm" href="category/update/@item.Id" title="Update"><i class="bi bi-pencil"></i></a>
-                        <button class="btn btn-outline-warning btn-sm" @onclick="async () => await _createUpdateModal.Show(item.Id)" title="Update Modal"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-danger btn-sm" @onclick="async () => await delete(item.Id)" title="Delete"><i class="bi bi-trash"></i></button>
-                    </td>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>
+                        <AuthorizeView>
+                            <Authorized>
+                                <a class="btn btn-primary btn-sm float-end mx-1" href="category/create" title="Create"><i class="bi bi-plus-square"></i></a>
+                                <button class="btn btn-outline-primary btn-sm float-end mx-1" @onclick="async () => await _createUpdateModal.Show(0)" title="Create Modal"><i class="bi bi-plus-square"></i></button>
+                            </Authorized>
+                        </AuthorizeView>
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in _filteredItems ?? _items)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td class="fit">
+                            <AuthorizeView>
+                                <Authorized>
+                                    <button class="btn btn-danger btn-sm" @onclick="async () => await delete(item.Id)" title="Delete"><i class="bi bi-trash"></i></button>
+                                    <button class="btn btn-outline-warning btn-sm" @onclick="async () => await _createUpdateModal.Show(item.Id)" title="Update Modal"><i class="bi bi-pencil"></i></button>
+                                    <a class="btn btn-warning btn-sm" href="category/update/@item.Id" title="Update"><i class="bi bi-pencil"></i></a>
+                                </Authorized>
+                            </AuthorizeView>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 <CreateUpdateModal @ref="_createUpdateModal" OnClose="modalClosed" />
@@ -81,7 +98,7 @@ else
     }
 
     private List<CategoryDto> _filteredItems => _items.Where(
-            x => x.Name.ToLower().Contains(_searchText.ToLower())).OrderBy(x=>x.Name).ToList();
+            x => x.Name.ToLower().Contains(_searchText.ToLower())).OrderBy(x => x.Name).ToList();
 
     private async Task delete(int id)
     {
