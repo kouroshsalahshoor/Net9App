@@ -1,5 +1,6 @@
 ﻿@page "/categories"
 @attribute [StreamRendering]
+@attribute [Authorize]
 
 <PageTitle>@_title</PageTitle>
 
@@ -36,12 +37,8 @@ else
                     <th>Id</th>
                     <th>Name</th>
                     <th>
-                        <AuthorizeView>
-                            <Authorized>
-                                <a class="btn btn-primary btn-sm float-end mx-1" href="category/create" title="Create"><i class="bi bi-plus-square"></i></a>
-                                <button class="btn btn-outline-primary btn-sm float-end mx-1" @onclick="async () => await _createUpdateModal.Show(0)" title="Create Modal"><i class="bi bi-plus-square"></i></button>
-                            </Authorized>
-                        </AuthorizeView>
+                        <a class="btn btn-primary btn-sm float-end mx-1" href="category/create" title="Create"><i class="bi bi-plus-square"></i></a>
+                        <button class="btn btn-outline-primary btn-sm float-end mx-1" @onclick="async () => await _createUpdateModal.Show(0)" title="Create Modal"><i class="bi bi-plus-square"></i></button>
                     </th>
                 </tr>
             </thead>
@@ -52,13 +49,9 @@ else
                         <td>@item.Id</td>
                         <td>@item.Name</td>
                         <td class="fit">
-                            <AuthorizeView>
-                                <Authorized>
-                                    <button class="btn btn-danger btn-sm" @onclick="async () => await delete(item.Id)" title="Delete"><i class="bi bi-trash"></i></button>
-                                    <button class="btn btn-outline-warning btn-sm" @onclick="async () => await _createUpdateModal.Show(item.Id)" title="Update Modal"><i class="bi bi-pencil"></i></button>
-                                    <a class="btn btn-warning btn-sm" href="category/update/@item.Id" title="Update"><i class="bi bi-pencil"></i></a>
-                                </Authorized>
-                            </AuthorizeView>
+                            <button class="btn btn-danger btn-sm" @onclick="async () => await delete(item.Id)" title="Delete"><i class="bi bi-trash"></i></button>
+                            <button class="btn btn-outline-warning btn-sm" @onclick="async () => await _createUpdateModal.Show(item.Id)" title="Update Modal"><i class="bi bi-pencil"></i></button>
+                            <a class="btn btn-warning btn-sm" href="category/update/@item.Id" title="Update"><i class="bi bi-pencil"></i></a>
                         </td>
                     </tr>
                 }
@@ -73,10 +66,23 @@ else
     private string _title = "Categories";
     private bool _loading = true;
 
-    private CreateUpdateModal _createUpdateModal;
+    private CreateUpdateModal _createUpdateModal = default!;
 
     private IEnumerable<CategoryDto> _items = new List<CategoryDto>();
     public string _searchText = "";
+
+    [CascadingParameter]
+    public Task<AuthenticationState> _authenticationState { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authenticationState;
+        if (authState.User.Identity!.IsAuthenticated == false)
+        {
+            var uri = new Uri(_navigationManager.Uri);
+            _navigationManager.NavigateTo("Account/Login?returnurl=" + uri.LocalPath, forceLoad: true);
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

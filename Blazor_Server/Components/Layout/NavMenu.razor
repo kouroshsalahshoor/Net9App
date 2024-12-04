@@ -10,10 +10,7 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="nav flex-column">
-        @* <AuthorizeView>
-            <Authorized></Authorized>
-            <NotAuthorized></NotAuthorized>
-        </AuthorizeView> *@
+        
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <i class="bi-house-door-fill px-1"></i>
@@ -21,100 +18,99 @@
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="()=>expandSubNavPages = !expandSubNavPages">
-                @if (expandSubNavPages)
-                {
-                    <i class="bi-dash-square-fill px-1"></i>
-                }
-                else
-                {
-                    <i class="bi-plus-square-fill px-1"></i>
-                }
-                Pages
-            </NavLink>
-        </div>
-        @if (expandSubNavPages)
-        {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="Products">
-                    <i class="bi-list-nested px-3"></i>
-                    Products
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="Categories">
-                    <i class="bi-list-nested px-3"></i>
-                    Categories
-                </NavLink>
-            </div>
-
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="Employees">
-                    <i class="bi-list-nested px-3"></i>
-                    Employees
-                </NavLink>
-            </div>
-        }
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="()=>expandSubNavDemos = !expandSubNavDemos">
-                @if (expandSubNavDemos)
-                {
-                    <i class="bi-dash-square-fill px-1"></i>
-                }
-                else
-                {
-                    <i class="bi-plus-square-fill px-1"></i>
-                }
-                Demos
-            </NavLink>
-        </div>
-        @if (expandSubNavDemos)
-        {
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="swal">
-                    <i class="bi-list-nested px-3"></i>
-                    Sweet Alert
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="toastr">
-                    <i class="bi-list-nested px-3"></i>
-                    Toastr
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="confirmbox">
-                    <i class="bi-list-nested px-3"></i>
-                    Confirm Box
-                </NavLink>
-            </div>
-
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="counter">
-                    <i class="bi-list-nested px-3"></i>
-                    Counter
-                </NavLink>
-            </div>
-
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="weather">
-                    <i class="bi-list-nested px-3"></i>
-                    Weather
-                </NavLink>
-            </div>
-        }
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <i class="bi-lock px-1"></i>
-                Auth Required
-            </NavLink>
-        </div>
-
         <AuthorizeView>
             <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" @onclick="()=>expandSubNavPages = !expandSubNavPages">
+                        @if (expandSubNavPages)
+                        {
+                            <i class="bi-dash-square-fill px-1"></i>
+                        }
+                        else
+                        {
+                            <i class="bi-plus-square-fill px-1"></i>
+                        }
+                        Pages
+                    </NavLink>
+                </div>
+                @if (expandSubNavPages)
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Products">
+                            <i class="bi-list-nested px-3"></i>
+                            Products
+                        </NavLink>
+                    </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Categories">
+                            <i class="bi-list-nested px-3"></i>
+                            Categories
+                        </NavLink>
+                    </div>
+
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="Employees">
+                            <i class="bi-list-nested px-3"></i>
+                            Employees
+                        </NavLink>
+                    </div>
+                }
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" @onclick="()=>expandSubNavDemos = !expandSubNavDemos">
+                        @if (expandSubNavDemos)
+                        {
+                            <i class="bi-dash-square-fill px-1"></i>
+                        }
+                        else
+                        {
+                            <i class="bi-plus-square-fill px-1"></i>
+                        }
+                        Demos
+                    </NavLink>
+                </div>
+                @if (expandSubNavDemos)
+                {
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="swal">
+                            <i class="bi-list-nested px-3"></i>
+                            Sweet Alert
+                        </NavLink>
+                    </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="toastr">
+                            <i class="bi-list-nested px-3"></i>
+                            Toastr
+                        </NavLink>
+                    </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="confirmbox">
+                            <i class="bi-list-nested px-3"></i>
+                            Confirm Box
+                        </NavLink>
+                    </div>
+
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="counter">
+                            <i class="bi-list-nested px-3"></i>
+                            Counter
+                        </NavLink>
+                    </div>
+
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="weather">
+                            <i class="bi-list-nested px-3"></i>
+                            Weather
+                        </NavLink>
+                    </div>
+                }
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="auth">
+                        <i class="bi-lock px-1"></i>
+                        Auth Required
+                    </NavLink>
+                </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Manage">
                         <i class="bi-person-fill px-1"></i>
