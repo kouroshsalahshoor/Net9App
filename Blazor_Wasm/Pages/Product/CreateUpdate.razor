@@ -90,8 +90,8 @@
     public int Id { get; set; }
 
     [SupplyParameterFromForm]
-    private ProductDto _dto { get; set; } = new();
-    private IEnumerable<CategoryDto> _categories { get; set; } = new List<CategoryDto>();
+    private ProductDto? _dto { get; set; } = new();
+    private IEnumerable<CategoryDto>? _categories { get; set; } = new List<CategoryDto>();
 
     protected override async Task OnParametersSetAsync()
     {
