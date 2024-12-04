@@ -103,8 +103,10 @@ else
         StateHasChanged();
     }
 
-    private List<CategoryDto> _filteredItems => _items.Where(
-            x => x.Name.ToLower().Contains(_searchText.ToLower())).OrderBy(x => x.Name).ToList();
+    private List<CategoryDto> _filteredItems => _items.Where(x => 
+            x.Name.ToLower().Contains(_searchText.ToLower()) ||
+            x.Id.ToString().ToLower().Contains(_searchText.ToLower())
+    ).OrderBy(x => x.Name).ToList();
 
     private async Task delete(int id)
     {
