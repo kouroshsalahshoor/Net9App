@@ -125,3 +125,6 @@ Set namespace for current context
 
 ### Books
 [ebooksworld](https://www.ebooksworld.ir/)
+
+### Resources
+[Dot Net Mastery](https://www.dotnetmastery.com/)
