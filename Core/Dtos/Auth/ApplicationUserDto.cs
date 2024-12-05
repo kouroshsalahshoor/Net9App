@@ -8,7 +8,7 @@ public class ApplicationUserDto
     public string LastName { get; set; } = default!;
     public string Email { get; set; } = default!;
     public string Role { get; set; } = default!;
-    public string? Token { get; set; } 
-    public int ExpiresIn { get; set; } 
-    public DateTime ExpireyTimeStamp { get; set; } 
+    //public string? Token { get; set; } 
+    //public int ExpiresIn { get; set; } 
+    //public DateTime ExpireyTimeStamp { get; set; } 
 }

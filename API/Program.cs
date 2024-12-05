@@ -21,22 +21,22 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+//https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-9.0
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager();
 
-//https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-9.0
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.Password.RequireNonAlphanumeric=false;
+    options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 1;
-    options.Password.RequireDigit=false;
-    options.Password.RequiredUniqueChars=0;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredUniqueChars = 0;
     options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase=false;
+    options.Password.RequireUppercase = false;
 
-    options.User.RequireUniqueEmail=true;
+    options.User.RequireUniqueEmail = true;
     //options.User.AllowedUserNameCharacters =
     //        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 
@@ -44,10 +44,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedAccount = false;
 
-    //// Default Lockout settings.
-    //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-    //options.Lockout.MaxFailedAccessAttempts = 5;
-    //options.Lockout.AllowedForNewUsers = true;
+    // Default Lockout settings.
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = false;
 });
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -58,24 +58,24 @@ builder.Services.AddScoped<IJobCategoryRepository, JobCategoryRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
 //https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-9.0
-var _allowSpecificOrigins = "MyAllowSpecificOrigins";
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("open",
-//        builder => builder.AllowAnyOrigin().AllowAnyHeader());
-//});
-
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: _allowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("https://localhost:7207",
-                                                    "http://www.xxx.com")
-                                                    .AllowAnyHeader()
-                                                    .AllowAnyMethod();
-                      });
+    options.AddPolicy("open",
+        builder => builder.AllowAnyOrigin().AllowAnyHeader());
 });
+
+//var _allowSpecificOrigins = "MyAllowSpecificOrigins";
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: _allowSpecificOrigins,
+//                      policy =>
+//                      {
+//                          policy.WithOrigins("https://localhost:7207",
+//                                                    "http://www.xxx.com")
+//                                                    .AllowAnyHeader()
+//                                                    .AllowAnyMethod();
+//                      });
+//});
 
 var app = builder.Build();
 
@@ -92,7 +92,8 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors(_allowSpecificOrigins);
+app.UseCors("open");
+//app.UseCors(_allowSpecificOrigins);
 
 app.UseAuthorization();
 
