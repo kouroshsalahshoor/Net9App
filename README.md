@@ -21,7 +21,6 @@
 ## Subjects:
 - [x] Blazor
 - [x] Clean Architecture
-- [x] Test
 - [x] XUnit
 - [x] AutoFixture
 - [x] Fluent Assertion
@@ -29,13 +28,11 @@
 - [x] Selenium
 - [x] Specflow
 - [ ] identity
-- [ ] Design Patterns
-- [ ] Reflection
 - [x] Long-Running Tasks
 - [x] Hangfire
-- [ ] azure
+- [x] azure AD
 - [ ] ci cd
-- [ ] docker
+- [x] docker
 - [x] Kubernetes
 - [x] kind
 - [x] Typescript
@@ -43,6 +40,8 @@
 - [ ] React
 - [ ] Angular
 - [ ] Vue
+- [ ] Design Patterns
+- [ ] Reflection
 ---
 # bunit
 ## install
