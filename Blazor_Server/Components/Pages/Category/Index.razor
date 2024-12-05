@@ -1,6 +1,6 @@
 ﻿@page "/categories"
 @attribute [StreamRendering]
-@attribute [Authorize]
+@attribute [Authorize(Roles =Constants.Role_Admin)]
 
 <PageTitle>@_title</PageTitle>
 
@@ -81,6 +81,12 @@ else
         {
             var uri = new Uri(_navigationManager.Uri);
             _navigationManager.NavigateTo("Account/Login?returnurl=" + uri.LocalPath, forceLoad: true);
+        }
+        else
+        {
+            if (authState.User.IsInRole(Constants.Role_Admin))
+            {
+            }
         }
     }
 

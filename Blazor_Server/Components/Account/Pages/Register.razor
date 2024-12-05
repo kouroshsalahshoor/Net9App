@@ -75,15 +75,15 @@
 
     private string? Message => identityErrors is null ? null : $"Error: {string.Join(", ", identityErrors.Select(error => error.Description))}";
 
-    protected override async Task OnInitializedAsync()
-    {
-        if (await _roleManager.RoleExistsAsync(Constants.Role_Admin) == false)
-        {
-            await _roleManager.CreateAsync(new IdentityRole(Constants.Role_Admin));
-            await _roleManager.CreateAsync(new IdentityRole(Constants.Role_User));
-            Logger.LogInformation("Roles Created");
-        }
-    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     if (await _roleManager.RoleExistsAsync(Constants.Role_Admin) == false)
+    //     {
+    //         await _roleManager.CreateAsync(new IdentityRole(Constants.Role_Admin));
+    //         await _roleManager.CreateAsync(new IdentityRole(Constants.Role_User));
+    //         Logger.LogInformation("Roles Created");
+    //     }
+    // }
 
     public async Task RegisterUser(EditContext editContext)
     {
