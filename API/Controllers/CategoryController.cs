@@ -1,12 +1,14 @@
 ﻿using Application.Repository;
+using Core;
 using Core.Dtos.API;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles =Constants.Role_Admin)]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
