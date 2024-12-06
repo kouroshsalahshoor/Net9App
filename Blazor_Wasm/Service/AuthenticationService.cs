@@ -4,6 +4,7 @@ using Core.Common;
 using Core.Dtos.API;
 using Core.Dtos.Auth;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Blazor_Wasm.Service
         {
             var content = JsonConvert.SerializeObject(dto);
             var body = new StringContent(content, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("api/account/login", body);
+            var response = await _httpClient.PostAsync("account/login", body);
             var responseContent = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseDto>(responseContent);
 
@@ -55,7 +56,11 @@ namespace Blazor_Wasm.Service
         {
             var content = JsonConvert.SerializeObject(dto);
             var body = new StringContent(content, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("api/account/register", body);
+            var response = await _httpClient.PostAsync("account/register", body);
+            if (response.StatusCode.ToString() == "Created")
+            {
+                return new ResponseDto() { IsSuccessful = true };
+            }
             var responseContent = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResponseDto>(responseContent);
 
@@ -64,7 +69,7 @@ namespace Blazor_Wasm.Service
                 return new ResponseDto() { IsSuccessful = true };
             }
 
-            return new ResponseDto() { IsSuccessful = false };
+            return new ResponseDto() { IsSuccessful = false, Errors = result.Errors!.ToList() };
         }
     }
 }

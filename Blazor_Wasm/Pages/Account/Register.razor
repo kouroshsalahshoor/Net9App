@@ -1,0 +1,96 @@
+﻿@page "/register"
+
+@inject IAuthenticationService _authService
+
+<PageTitle>Register</PageTitle>
+
+<EditForm Model="_model" OnValidSubmit="save" class="pt-4">
+    <DataAnnotationsValidator />
+    <div class="py-4">
+        <div class=" row form-group ">
+            <div class="col-6 offset-3 ">
+                <div class="card border">
+                    <div class="card-body px-lg-5 pt-4">
+                        <h3 class="col-12 text-success text-center py-2">
+                            <strong>Register</strong>
+                        </h3>
+
+                        @if (_messages.Any())
+                        {
+                            <div>
+                                @foreach (var item in _messages)
+                                {
+                                    <p class="text-danger">@item</p>
+                                }
+                            </div>
+                        }
+
+                        <div class="py-2">
+                            <InputText @bind-Value="_model.UserName" type="text" class="form-control" placeholder="UserName..." />
+                            <ValidationMessage For="(()=>_model.UserName)" />
+                        </div>
+                        <div class="py-2">
+                            <InputText @bind-Value="_model.Email" type="text" class="form-control" placeholder="Email..." />
+                            <ValidationMessage For="(()=>_model.Email)" />
+                        </div>
+                        <div class="py-2">
+                            <InputText @bind-Value="_model.FirstName" type="text" class="form-control" placeholder="FirstName..." />
+                            <ValidationMessage For="(()=>_model.FirstName)" />
+                        </div>
+                        <div class="py-2">
+                            <InputText @bind-Value="_model.LastName" type="text" class="form-control" placeholder="LastName..." />
+                            <ValidationMessage For="(()=>_model.LastName)" />
+                        </div>
+                        <div class="form-row py-2">
+                            <div class="col">
+                                <InputText @bind-Value="_model.Password" type="password" id="password" placeholder="Password..." class="form-control" />
+                                <ValidationMessage For="(()=>_model.Password)" />
+                            </div>
+                            <div class="col py-2">
+                                <InputText @bind-Value="_model.ConfirmPassword" type="password" id="confirm" class="form-control" placeholder="Confirm Password..." />
+                                <ValidationMessage For="(()=>_model.ConfirmPassword)" />
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <InputSelect @bind-Value="_model.Role" class="form-select">
+                                <option value="" selected disabled>Please Select a Role</option>
+                                <option value="@Constants.Role_User">@Constants.Role_User</option>
+                                <option value="@Constants.Role_Admin">@Constants.Role_Admin</option>
+                            </InputSelect>
+                            <ValidationMessage For="(()=>_model.Role)" />
+                        </div>
+                        <hr style="background-color:aliceblue" />
+                        <div class="py-2">
+                            <button type="submit" class="btn btn-success btn-block"><i class="bi bi-person-plus-fill"></i> Register</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private RegisterDto _model = new();
+    private bool _loading = false;
+    private List<string> _messages = new();
+
+    private async Task save()
+    {
+        _loading = true;
+        _messages.Clear();
+
+        var response = await _authService.Register(_model);
+
+        if (response.IsSuccessful)
+        {
+            _navigationManager.NavigateTo("login");
+        }
+        else
+        {
+            _messages = response.Errors!.ToList();
+        }
+
+        _loading = false;
+    }
+}

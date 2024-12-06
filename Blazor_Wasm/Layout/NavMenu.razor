@@ -39,18 +39,33 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-light me-5" type="submit">Search</button>
             </form>
 
             <ul class="navbar-nav me-0 mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Register"><span class="p-2">Register</span></NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="Login"><span class="p-2">Login</span></NavLink>
-                </li>
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" style="cursor:text; text-decoration: none">
+                                <span class="p-2">
+                                    @context.User.Identity?.Name
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Logout"><span class="p-2">Logout</span></NavLink>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Register"><span class="p-2">Register</span></NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Login"><span class="p-2">Login</span></NavLink>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
             </ul>
         </div>
     </div>

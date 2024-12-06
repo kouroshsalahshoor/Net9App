@@ -54,7 +54,7 @@ namespace API.Controllers.Account
                 return BadRequest(new ResponseDto()
                 {
                     IsSuccessful = false,
-                    Errors = result.Errors.Select(x => x.Description),
+                    Errors = result.Errors.Select(x => x.Description).ToList(),
                 });
             }
 
@@ -64,11 +64,12 @@ namespace API.Controllers.Account
                 return BadRequest(new ResponseDto()
                 {
                     IsSuccessful = false,
-                    Errors = result.Errors.Select(x => x.Description),
+                    Errors = result.Errors.Select(x => x.Description).ToList(),
                 });
             }
 
             return StatusCode(StatusCodes.Status201Created);
+            //return Ok(new ResponseDto { IsSuccessful = true });
         }
 
         [HttpPost]

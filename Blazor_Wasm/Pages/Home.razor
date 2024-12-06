@@ -8,10 +8,10 @@
 
 <AuthorizeView>
     <Authorized>
-        <p class="text-success">@context.User.Identity!.Name</p>
+        <span class="text-success">@context.User.Identity!.Name</span>
     </Authorized>
     <NotAuthorized>
-        <p class="text-danger">Not Authorized</p>
+        <span class="text-danger">Not Authorized</span>
     </NotAuthorized>
 </AuthorizeView>
 
