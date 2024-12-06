@@ -37,6 +37,8 @@ namespace Blazor_Wasm.Service
                 await _localStorage.SetAsync(Constants.Local_Token, result.Token!);
                 await _localStorage.SetAsync(Constants.Local_User, result.UserDto!);
 
+                ((AuthStateProvider)_authtateProvider).NotifyLoggedIn(result.Token);
+
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
                 return new ResponseDto() { IsSuccessful = true };
             }
@@ -48,6 +50,8 @@ namespace Blazor_Wasm.Service
         {
             await _localStorage.RemoveAsync(Constants.Local_Token);
             await _localStorage.RemoveAsync(Constants.Local_User);
+
+            ((AuthStateProvider)_authtateProvider).NotifyLogOut();
 
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }

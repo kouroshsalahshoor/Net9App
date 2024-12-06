@@ -1,33 +1,70 @@
 ﻿@page "/login"
+@inject IAuthenticationService _authService
 
 <PageTitle>Login</PageTitle>
 
-<form>
+<EditForm Model="_model" OnValidSubmit="save">
+    <DataAnnotationsValidator />
     <div class="py-4">
         <div class=" row form-group ">
             <div class="col-6 offset-3 ">
                 <div class="card border">
                     <div class="card-body px-lg-5 pt-4">
                         <h3 class="col-12 text-success text-center py-2">
-                            <strong>Sign In</strong>
+                            <strong>Login</strong>
                         </h3>
+
+                        @if (string.IsNullOrEmpty(_message))
+                        {
+                            <div>
+                                <p class="text-danger">@_message</p>
+                            </div>
+                        }
+
                         <div class="py-2">
-                            <input id="email" placeholder="Email..." class="form-control mb-2" />
+                            <InputText @bind-Value="_model.UserName" id="username" placeholder="UserName..." class="form-control mb-2" />
+                            <ValidationMessage For="(()=>_model.UserName)" />
                         </div>
                         <div class="py-2">
-                            <input type="password" placeholder="Password..." id="password" class="form-control mb-2" />
+                            <InputText @bind-Value="_model.Password" type="password" placeholder="Password..." id="password" class="form-control mb-2" />
+                            <ValidationMessage For="(()=>_model.Password)" />
                         </div>
                         <div class="py-2">
                             <button type="submit" class="btn btn-success btn-block"><i class="bi bi-person-bounding-box"></i> Login</button>
-                            <a href="/register" class="btn btn-primary text-white m-2"><i class="bi bi-person-plus-fill"></i> Register as a new user</a>
+                            <a href="register" class="btn btn-primary text-white m-2"><i class="bi bi-person-plus-fill"></i> Register as a new user</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
+</EditForm>
+
+@if (_loading)
+{
+    <_Loading />
+}
 
 @code {
+    private LoginDto _model = new();
+    private bool _loading = false;
+    private string _message = string.Empty;
 
+    private async Task save()
+    {
+        _loading = true;
+
+        var response = await _authService.Login(_model);
+
+        if (response.IsSuccessful)
+        {
+            _navigationManager.NavigateTo("/");
+        }
+        else
+        {
+            _message = response.Message!;
+        }
+
+        _loading = false;
+    }
 }

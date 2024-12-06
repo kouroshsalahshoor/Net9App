@@ -1,5 +1,4 @@
 ﻿@page "/register"
-
 @inject IAuthenticationService _authService
 
 <PageTitle>Register</PageTitle>
@@ -69,6 +68,11 @@
         </div>
     </div>
 </EditForm>
+
+@if (_loading)
+{
+    <_Loading />
+}
 
 @code {
     private RegisterDto _model = new();
