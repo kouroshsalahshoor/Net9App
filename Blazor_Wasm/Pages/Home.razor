@@ -2,7 +2,18 @@
 
 <PageTitle>@_title</PageTitle>
 
-<h3 class="bg-primary text-white text-center p-1">@_title</h3>
+<h3 class="m-3">@_title</h3>
+@* <h3 class="bg-primary text-white text-center p-1">@_title</h3> *@
+<hr />
+
+<AuthorizeView>
+    <Authorized>
+        <p class="text-success">@context.User.Identity!.Name</p>
+    </Authorized>
+    <NotAuthorized>
+        <p class="text-danger">Not Authorized</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 <div class="container">
     <div class="input-group mb-3">

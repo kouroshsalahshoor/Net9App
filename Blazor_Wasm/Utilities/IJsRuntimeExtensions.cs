@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace Blazor_Server.Extensions
+namespace Blazor_Wasm.Utilities
 {
     public static class IJsRuntimeExtensions
     {

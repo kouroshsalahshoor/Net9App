@@ -1,5 +1,5 @@
 ﻿using Application.Repository;
-using Core;
+using Core.Common;
 using Core.Dtos.API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

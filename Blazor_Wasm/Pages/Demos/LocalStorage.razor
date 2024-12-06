@@ -1,0 +1,45 @@
+﻿@page "/LocalStorage"
+@inject IJSRuntime JSRuntime
+
+@* https://www.thomasclaudiushuber.com/2021/04/19/store-data-of-your-blazor-app-in-the-local-storage-and-in-the-session-storage/ *@
+
+<h1>Local Storage!</h1>
+
+<input class="form-control" @bind="_currentInputValue" />
+<button class="btn btn-secondary" @onclick="Save">Save</button>
+<button class="btn btn-secondary" @onclick="Read">Read</button>
+<button class="btn btn-secondary" @onclick="Delete">Delete</button>
+
+<p>@_message</p>
+
+@code {
+    string? _currentInputValue;
+    string? _message;
+
+    public async Task Save()
+    {
+        if (string.IsNullOrEmpty(_currentInputValue) == false)
+        {
+            await JSRuntime.InvokeVoidAsync("localStorage.setItem", "name", _currentInputValue);
+            _message = "saved";
+            _currentInputValue = string.Empty;
+        }
+        else
+        {
+            _message = "Please eneter an input";
+        }
+    }
+
+    public async Task Read()
+    {
+        _currentInputValue = await JSRuntime.InvokeAsync<string>("localStorage.getItem", "name");
+        _message = "read";
+    }
+
+    public async Task Delete()
+    {
+        await JSRuntime.InvokeAsync<string>("localStorage.removeItem", "name");
+        _currentInputValue = string.Empty;
+        _message = "deleted";
+    }
+}
