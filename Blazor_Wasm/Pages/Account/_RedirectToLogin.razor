@@ -1,0 +1,21 @@
+﻿@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> _authState { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authState;
+        if (authState?.User?.Identity is null || authState.User.Identity.IsAuthenticated == false)
+        {
+            var returnUrl = _navigationManager.ToBaseRelativePath(_navigationManager.Uri);
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                _navigationManager.NavigateTo("login");
+            }
+            else
+            {
+                _navigationManager.NavigateTo($"login?returnurl={returnUrl}");
+            }
+        }
+    }
+}

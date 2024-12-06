@@ -49,6 +49,7 @@
     private LoginDto _model = new();
     private bool _loading = false;
     private string _message = string.Empty;
+    private string _returnUrl = string.Empty;
 
     private async Task save()
     {
@@ -58,7 +59,17 @@
 
         if (response.IsSuccessful)
         {
+            var absolutUri = new Uri(_navigationManager.Uri);
+            var queryParam = HttpUtility.ParseQueryString(absolutUri.Query);
+            _returnUrl = queryParam["returnurl"]!;
+            if (string.IsNullOrEmpty(_returnUrl))
+            {
             _navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                _navigationManager.NavigateTo(_returnUrl);
+            }
         }
         else
         {
