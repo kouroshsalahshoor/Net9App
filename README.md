@@ -107,6 +107,9 @@ Set namespace for current context
 ### Test
 * [Udemy – Advanced Automation Testing of Modern Apps with C# .NET 2022-12](https://downloadlynet.ir/2024/20/121451/03/advanced-automation-testing-of-modern-apps-with-c-net/21/?#/121451-udemy-092454125903.html)
 
+### Ci Cd
+- Dometrain - Let's Build It URL Shortener in .NET 2024-11
+
 ### Architecture
 * [Pluralsight – ASP.NET Core 6 Clean Architecture 2022-12](https://downloadlynet.ir/2023/18/93765/03/asp-net-core-6-clean-architecture/21/?#/93765-pluralsi-022450112828.html)
 
